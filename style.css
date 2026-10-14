@@ -1,0 +1,506 @@
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #101014;
+    color: #ffffff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 6%;
+    background-color: #17171d;
+    border-bottom: 1px solid #303038;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    margin-top: 5px;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #bbbbbb;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #e50914;
+}
+
+/* =========================
+   PROMOTIONAL BANNER
+========================= */
+
+.hero-banner {
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+
+    background: radial-gradient(
+        ellipse at center,
+        #68212e 0%,
+        #32121d 45%,
+        #101014 100%
+    );
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-label {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #ffb5bd;
+}
+
+.hero-content h2 {
+    font-size: clamp(32px, 5vw, 52px);
+    margin: 18px 0;
+}
+
+.hero-content > p:not(.hero-label) {
+    font-size: 17px;
+    color: #dddddd;
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 32px;
+    border-radius: 5px;
+    background-color: #b91c2c;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.hero-btn:hover {
+    background-color: #e50914;
+}
+
+/* =========================
+   MOVIE SECTION
+========================= */
+
+.movie-section {
+    max-width: 1300px;
+    margin: 55px auto 80px;
+    padding: 0 5%;
+    scroll-margin-top: 30px;
+}
+
+.movie-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 430px;
+}
+
+.category-title {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.category-title:hover {
+    color: #ffb5bd;
+}
+
+#category-counter {
+    color: #999999;
+    font-size: 13px;
+}
+
+/* =========================
+   DRAGGABLE UNDERLINE
+========================= */
+
+.category-slider {
+    display: flex;
+    align-items: center;
+    max-width: 430px;
+    height: 24px;
+    margin: 5px 0 28px;
+}
+
+#category-range {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 100%;
+    height: 3px;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+
+    background: #44444b;
+    cursor: pointer;
+    touch-action: pan-y;
+}
+
+#category-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 26px;
+    height: 7px;
+    border: none;
+    border-radius: 5px;
+
+    background-color: #e50914;
+    cursor: grab;
+}
+
+#category-range::-moz-range-thumb {
+    width: 26px;
+    height: 7px;
+    border: none;
+    border-radius: 5px;
+
+    background-color: #e50914;
+    cursor: grab;
+}
+
+#category-range:active::-webkit-slider-thumb {
+    cursor: grabbing;
+}
+
+#category-range:focus-visible,
+.category-title:focus-visible,
+.buy-btn:focus-visible,
+.carousel-prev:focus-visible,
+.carousel-next:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 5px;
+}
+
+/* =========================
+   CAROUSEL
+========================= */
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.movie-carousel {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    min-width: 0;
+
+    overflow-x: auto;
+    padding: 5px 0 15px;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+.movie-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-carousel.is-changing {
+    opacity: 0;
+}
+
+.carousel-prev,
+.carousel-next {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #44444b;
+    border-radius: 50%;
+
+    background-color: #24242b;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.carousel-prev:hover:not(:disabled),
+.carousel-next:hover:not(:disabled) {
+    background-color: #b91c2c;
+}
+
+.carousel-prev:disabled,
+.carousel-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* =========================
+   MOVIE POSTER
+========================= */
+
+.movie-card {
+    position: relative;
+
+    flex: 0 0 205px;
+    width: 205px;
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #25252d;
+
+    scroll-snap-align: start;
+}
+
+.movie-poster {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-poster {
+    transform: scale(1.05);
+}
+
+/* =========================
+   POSTER HOVER OVERLAY
+========================= */
+
+.movie-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.86);
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay,
+.movie-card:focus-within .movie-overlay {
+    opacity: 1;
+}
+
+.movie-overlay h3 {
+    margin: 0 0 15px;
+    font-size: 18px;
+}
+
+.movie-runtime {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #eeeeee;
+}
+
+.movie-rating {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 10px;
+
+    background-color: #3c3c46;
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.movie-advisory {
+    margin: 10px 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+/* =========================
+   BUY / VIEW DETAILS BUTTON
+========================= */
+
+.buy-btn {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 10px;
+
+    border-radius: 5px;
+    background-color: #b91c2c;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+
+    transition: background-color 0.2s;
+}
+
+.buy-btn:hover {
+    background-color: #e50914;
+}
+
+.empty-message {
+    color: #aaaaaa;
+    padding: 30px 10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    padding: 30px 20px;
+    background-color: #17171d;
+    border-top: 1px solid #303038;
+
+    color: #aaaaaa;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* =========================
+   SMALLER SCREENS
+========================= */
+
+@media (max-width: 768px) {
+
+    .site-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero-banner {
+        min-height: 300px;
+    }
+
+    .movie-section {
+        margin-top: 40px;
+    }
+
+    .category-title {
+        font-size: 23px;
+    }
+
+    .movie-card {
+        flex-basis: 165px;
+        width: 165px;
+    }
+
+    .movie-carousel {
+        gap: 12px;
+    }
+
+    .carousel-container {
+        gap: 8px;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .movie-overlay h3 {
+        font-size: 15px;
+    }
+
+    .movie-runtime,
+    .movie-advisory {
+        font-size: 11px;
+    }
+}
+
+/* Touchscreens: keep booking actions accessible */
+@media (hover: none) {
+    .movie-overlay {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.72);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    html,
+    .movie-carousel {
+        scroll-behavior: auto;
+    }
+
+    .movie-carousel,
+    .movie-poster,
+    .movie-overlay {
+        transition: none;
+    }
+}
