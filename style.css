@@ -74,6 +74,10 @@ nav a:hover {
     color: #e50914;
 }
 
+nav a[aria-current="page"] {
+    color: #ffb5bd;
+}
+
 /* =========================
    PROMOTIONAL BANNER
 ========================= */
@@ -425,6 +429,207 @@ nav a:hover {
 }
 
 /* =========================
+   INFORMATION PAGES
+========================= */
+
+.page-banner {
+    padding: 72px 20px;
+    text-align: center;
+    background: radial-gradient(
+        ellipse at center,
+        #68212e 0%,
+        #32121d 45%,
+        #101014 100%
+    );
+}
+
+.page-banner-content {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.page-banner .hero-label {
+    margin: 0;
+}
+
+.page-banner h2 {
+    margin: 16px 0;
+    font-size: clamp(34px, 5vw, 52px);
+}
+
+.page-banner p:not(.hero-label) {
+    margin: 0;
+    color: #dddddd;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.content-section {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 56px 5% 76px;
+}
+
+.content-intro {
+    max-width: 680px;
+    margin: 0 0 30px;
+    color: #bbbbbb;
+    line-height: 1.7;
+}
+
+.content-section h3 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.theatre-grid,
+.promotion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.theatre-card,
+.promotion-card {
+    overflow: hidden;
+    border: 1px solid #303038;
+    border-radius: 7px;
+    background-color: #17171d;
+}
+
+.theatre-card {
+    padding: 25px;
+}
+
+.card-kicker {
+    margin: 0 0 10px;
+    color: #ffb5bd;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.theatre-card h4,
+.promotion-card h4 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.theatre-location {
+    margin: 8px 0 18px;
+    color: #bbbbbb;
+}
+
+.theatre-card p:not(.card-kicker):not(.theatre-location) {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.amenity-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.amenity-list li {
+    padding: 6px 9px;
+    border-radius: 4px;
+    background: #292930;
+    color: #dddddd;
+    font-size: 11px;
+}
+
+.promotion-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.promotion-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+}
+
+.promotion-value {
+    display: inline-block;
+    margin: 0 0 18px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    background: #b91c2c;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.promotion-card h4 {
+    margin-bottom: 10px;
+}
+
+.promotion-card-content > p:not(.promotion-value) {
+    margin: 0 0 18px;
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.promotion-terms {
+    margin-top: auto !important;
+    color: #999999 !important;
+    font-size: 12px !important;
+}
+
+.promotion-card .hero-btn {
+    margin-top: 0;
+    padding: 11px 18px;
+    font-size: 13px;
+}
+
+.page-note {
+    margin: 28px 0 0;
+    color: #999999;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.page-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 38px;
+    padding: 25px;
+    border: 1px solid #303038;
+    border-radius: 7px;
+    background: #17171d;
+}
+
+.page-cta p {
+    margin: 8px 0 0;
+    color: #bbbbbb;
+    line-height: 1.5;
+}
+
+.page-cta .hero-btn {
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.page-cta .hero-btn:focus-visible,
+.promotion-card .hero-btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
+}
+
+/* =========================
    SMALLER SCREENS
 ========================= */
 
@@ -439,6 +644,20 @@ nav a:hover {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
+    }
+
+    .page-banner {
+        padding: 56px 20px;
+    }
+
+    .content-section {
+        padding-top: 42px;
+        padding-bottom: 56px;
+    }
+
+    .theatre-grid,
+    .promotion-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .hero-banner {
@@ -473,6 +692,11 @@ nav a:hover {
         font-size: 15px;
     }
 
+    .page-cta {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
     .movie-overlay h3 {
         font-size: 15px;
     }
@@ -480,6 +704,13 @@ nav a:hover {
     .movie-runtime,
     .movie-advisory {
         font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theatre-grid,
+    .promotion-grid {
+        grid-template-columns: 1fr;
     }
 }
 
