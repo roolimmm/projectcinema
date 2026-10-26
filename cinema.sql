@@ -85,6 +85,43 @@ INSERT INTO `screenings` (`screening_id`, `movie_id`, `cinema`, `screening_date`
 (4, 1, 'Yishun', '2026-10-28', '14:00:00'),
 (5, 1, 'Orchard', '2026-10-28', '20:30:00');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `screening_seats`
+--
+
+CREATE TABLE `screening_seats` (
+  `screening_seat_id` int(11) NOT NULL,
+  `screening_id` int(11) NOT NULL,
+  `seat_label` varchar(4) NOT NULL,
+  `status` enum('available','unavailable') NOT NULL DEFAULT 'available'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Seed every 8 x 10 seat plan for each existing screening.
+--
+
+INSERT INTO `screening_seats` (`screening_id`, `seat_label`, `status`)
+SELECT
+    s.screening_id,
+    CONCAT(CHAR(64 + r.row_number), seat_number.seat_number),
+    CASE
+        WHEN MOD(s.screening_id + r.row_number + seat_number.seat_number * 3, 11) = 0
+          OR (r.row_number = 4 AND seat_number.seat_number = 5)
+        THEN 'unavailable'
+        ELSE 'available'
+    END
+FROM screenings s
+CROSS JOIN (
+    SELECT 1 AS row_number UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+    UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8
+) r
+CROSS JOIN (
+    SELECT 1 AS seat_number UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+    UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10
+) seat_number;
+
 --
 -- Indexes for dumped tables
 --
@@ -103,6 +140,14 @@ ALTER TABLE `screenings`
   ADD KEY `movie_id` (`movie_id`);
 
 --
+-- Indexes for table `screening_seats`
+--
+ALTER TABLE `screening_seats`
+  ADD PRIMARY KEY (`screening_seat_id`),
+  ADD UNIQUE KEY `screening_seat` (`screening_id`, `seat_label`),
+  ADD KEY `screening_id` (`screening_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -118,6 +163,9 @@ ALTER TABLE `movies`
 ALTER TABLE `screenings`
   MODIFY `screening_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
+ALTER TABLE `screening_seats`
+  MODIFY `screening_seat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
+
 --
 -- Constraints for dumped tables
 --
@@ -127,6 +175,9 @@ ALTER TABLE `screenings`
 --
 ALTER TABLE `screenings`
   ADD CONSTRAINT `screenings_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`);
+
+ALTER TABLE `screening_seats`
+  ADD CONSTRAINT `screening_seats_ibfk_1` FOREIGN KEY (`screening_id`) REFERENCES `screenings` (`screening_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

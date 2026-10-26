@@ -897,7 +897,209 @@ button {
     margin-top: 20px;
 }
 
+/* Seat Selection */
+.seat-selection-page {
+    max-width: 1200px;
+    margin: 50px auto 80px;
+    padding: 0 30px;
+}
+
+.seat-selection-header {
+    margin-bottom: 35px;
+}
+
+.seat-selection-header h2 {
+    margin-bottom: 10px;
+}
+
+.seat-selection-header p {
+    color: #cccccc;
+}
+
+.seat-layout-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 35px;
+    align-items: start;
+}
+
+.cinema-seat-plan {
+    min-width: 0;
+    padding: 35px 25px;
+    border: 1px solid #33333b;
+    border-radius: 8px;
+    background: #1c1c22;
+}
+
+.screen-label {
+    text-align: center;
+    color: #999999;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.screen-line {
+    width: 70%;
+    height: 28px;
+    margin: 8px auto 38px;
+    border-top: 4px solid #d6a45a;
+    border-radius: 50%;
+    box-shadow: 0 -12px 18px rgba(214, 164, 90, 0.12);
+}
+
+.seat-grid {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.seat-row {
+    display: grid;
+    grid-template-columns: 20px repeat(10, 34px) 20px;
+    gap: 7px;
+    align-items: center;
+    margin-bottom: 9px;
+}
+
+.seat-row-label {
+    color: #999999;
+    text-align: center;
+    font-size: 12px;
+}
+
+.seat-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid #777780;
+    border-radius: 8px 8px 4px 4px;
+    background: #33333a;
+    color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.seat-button:hover:not(:disabled) {
+    border-color: #d6a45a;
+}
+
+.seat-button.selected {
+    border-color: #d12236;
+    background: #b91c2c;
+}
+
+.seat-button.occupied {
+    border-color: #24242a;
+    background: #55555d;
+    color: #99999f;
+    cursor: not-allowed;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+    color: #bbbbbb;
+    font-size: 13px;
+}
+
+.legend-seat {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+    border-radius: 4px 4px 2px 2px;
+    vertical-align: middle;
+}
+
+.legend-seat.available { background: #33333a; border: 1px solid #777780; }
+.legend-seat.selected { background: #b91c2c; }
+.legend-seat.occupied { background: #55555d; }
+
+.seat-cart {
+    position: sticky;
+    top: 20px;
+    padding: 25px;
+    border: 1px solid #33333b;
+    border-radius: 8px;
+    background: #1c1c22;
+}
+
+.seat-cart h3 {
+    margin: 0 0 18px;
+}
+
+#selected-seats-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#selected-seats-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #33333b;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.remove-seat-button {
+    border: 0;
+    background: none;
+    color: #f28b98;
+    cursor: pointer;
+}
+
+.seat-cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #55555d;
+}
+
+.seat-cart-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: 0;
+    border-radius: 5px;
+    background: #b91c2c;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.seat-cart-button:disabled {
+    background: #55555d;
+    cursor: not-allowed;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 @media (max-width: 900px) {
+    .seat-layout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .seat-cart {
+        position: static;
+    }
+
     .theatre-contact-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -908,6 +1110,20 @@ button {
 }
 
 @media (max-width: 600px) {
+    .seat-selection-page {
+        padding: 0 15px;
+    }
+
+    .cinema-seat-plan {
+        overflow-x: auto;
+        padding: 25px 15px;
+    }
+
+    .seat-grid {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     .theatre-contact-grid,
     .theatre-grid {
         grid-template-columns: 1fr;

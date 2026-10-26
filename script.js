@@ -155,4 +155,69 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
+
+    const seatButtons = document.querySelectorAll(".seat-button:not(.occupied)");
+    const selectedSeatsList = document.getElementById("selected-seats-list");
+    const selectedSeatCount = document.getElementById("selected-seat-count");
+    const seatCartEmpty = document.getElementById("seat-cart-empty");
+    const addSeatsButton = document.getElementById("add-seats-to-cart");
+
+    if (seatButtons.length > 0 && selectedSeatsList && selectedSeatCount && addSeatsButton) {
+        const selectedSeats = new Set();
+
+        function updateSeatCart() {
+            selectedSeatsList.replaceChildren();
+
+            Array.from(selectedSeats).sort().forEach(function (seat) {
+                const item = document.createElement("li");
+                const removeButton = document.createElement("button");
+                removeButton.type = "button";
+                removeButton.textContent = "Remove " + seat;
+                removeButton.className = "remove-seat-button";
+                removeButton.addEventListener("click", function () {
+                    selectedSeats.delete(seat);
+                    const seatButton = document.querySelector('[data-seat="' + seat + '"]');
+                    if (seatButton) {
+                        seatButton.classList.remove("selected");
+                        seatButton.setAttribute("aria-pressed", "false");
+                    }
+                    updateSeatCart();
+                });
+                item.append(document.createTextNode("Seat " + seat + " "), removeButton);
+                selectedSeatsList.appendChild(item);
+            });
+
+            const count = selectedSeats.size;
+            selectedSeatCount.textContent = count;
+            seatCartEmpty.hidden = count > 0;
+            addSeatsButton.disabled = count === 0;
+        }
+
+        seatButtons.forEach(function (button) {
+            button.setAttribute("aria-pressed", "false");
+            button.addEventListener("click", function () {
+                const seat = button.dataset.seat;
+
+                if (selectedSeats.has(seat)) {
+                    selectedSeats.delete(seat);
+                    button.classList.remove("selected");
+                    button.setAttribute("aria-pressed", "false");
+                } else {
+                    selectedSeats.add(seat);
+                    button.classList.add("selected");
+                    button.setAttribute("aria-pressed", "true");
+                }
+
+                updateSeatCart();
+            });
+        });
+
+        addSeatsButton.addEventListener("click", function () {
+            localStorage.setItem("razorCartSeats", JSON.stringify(Array.from(selectedSeats)));
+            addSeatsButton.textContent = "Added to Cart";
+            addSeatsButton.disabled = true;
+        });
+
+        updateSeatCart();
+    }
 });
