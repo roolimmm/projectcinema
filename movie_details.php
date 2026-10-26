@@ -78,7 +78,7 @@ $selectedDate = !empty($screenings)
             <a href="index.php">Home</a>
             <a href="index.php#movies">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.html">Promotions</a>
+            <a href="promotions.php">Promotions</a>
             <a href="bookings.html">My Bookings</a>
         </nav>
     </header>

@@ -35,7 +35,7 @@ while ($row = $result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theatres | RaZor Theatres</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
@@ -48,7 +48,7 @@ while ($row = $result->fetch_assoc()) {
             <a href="index.php">Home</a>
             <a href="index.php#movies">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.html">Promotions</a>
+            <a href="promotions.php">Promotions</a>
             <a href="bookings.html">My Bookings</a>
         </nav>
     </header>
@@ -73,7 +73,7 @@ while ($row = $result->fetch_assoc()) {
             </p>
 
             <div class="theatre-grid">
-                <article class="theatre-card">
+                <article class="theatre-card" id="theatre-orchard">
                     <p class="card-kicker">Central Singapore</p>
                     <h4>RaZor Theatres Orchard</h4>
                     <p class="theatre-location">Orchard Road</p>
@@ -93,7 +93,7 @@ while ($row = $result->fetch_assoc()) {
                     </button>
                 </article>
 
-                <article class="theatre-card">
+                <article class="theatre-card" id="theatre-harbour">
                     <p class="card-kicker">Waterfront</p>
                     <h4>RaZor Theatres Harbour</h4>
                     <p class="theatre-location">Harbourfront</p>
@@ -113,7 +113,7 @@ while ($row = $result->fetch_assoc()) {
                     </button>
                 </article>
 
-                <article class="theatre-card">
+                <article class="theatre-card" id="theatre-north">
                     <p class="card-kicker">North Singapore</p>
                     <h4>RaZor Theatres North</h4>
                     <p class="theatre-location">Yishun</p>
@@ -176,6 +176,29 @@ while ($row = $result->fetch_assoc()) {
                     No screenings available for this theatre on the selected date.
                 </p>
             </section>
+        </section>
+
+        <section class="theatre-contact" aria-labelledby="theatre-contact-heading">
+            <h4 id="theatre-contact-heading">Visit &amp; Contact</h4>
+            <div class="theatre-contact-grid">
+                <div class="theatre-contact-item">
+                    <h5>Operation Hours</h5>
+                    <p><strong>Mon - Fri:</strong> 12:00pm - 11:30pm</p>
+                    <p><strong>Sat &amp; Sun:</strong> 10:30am - 11:30pm</p>
+                    <p><strong>Public Holidays:</strong> 10:30am - 11:30pm</p>
+                </div>
+                <div class="theatre-contact-item">
+                    <h5>Call Us</h5>
+                    <p><a href="tel:+6561234567">+65 6123 4567</a></p>
+                    <p>Monday - Sunday</p>
+                    <p>10:30am - 11:30pm</p>
+                </div>
+                <div class="theatre-contact-item">
+                    <h5>Email Us</h5>
+                    <p>hello@razortheatres.com</p>
+                    <p>We aim to reply within two working days.</p>
+                </div>
+            </div>
         </section>
     </main>
 
