@@ -97,7 +97,7 @@
                         </p>
                         <p class="promotion-terms">
                             Valid Wednesdays after 6 pm. One discounted ticket
-                            per valid student ID.
+                            per valid student ID. Only valid for PG and PG13 movies.
                         </p>
                         <a href="index.php#movies" class="hero-btn">
                             See What's On

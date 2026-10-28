@@ -876,19 +876,44 @@ button {
     cursor: pointer;
 }
 
-.theatre-movie-showtimes {
-    padding: 20px 0;
+.theatre-table-wrapper {
+    overflow-x: auto;
+}
+
+.theatre-screenings-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    color: #eeeeee;
+    text-align: left;
+}
+
+.theatre-screenings-table caption {
+    padding: 0 0 16px;
+    color: #cccccc;
+    font-size: 14px;
+    text-align: left;
+}
+
+.theatre-screenings-table th,
+.theatre-screenings-table td {
+    padding: 14px 16px;
     border-bottom: 1px solid #33333b;
 }
 
-.theatre-movie-showtimes:last-child {
-    border-bottom: none;
+.theatre-screenings-table thead th {
+    background-color: #24242a;
+    color: #ffffff;
+    font-size: 14px;
 }
 
-.theatre-movie-showtimes h4 {
+.theatre-screenings-table tbody th {
     color: #ffffff;
-    font-size: 18px;
-    margin: 0 0 15px;
+    font-weight: normal;
+}
+
+.theatre-screenings-table tbody tr:hover {
+    background-color: #24242a;
 }
 
 #theatre-no-screenings {

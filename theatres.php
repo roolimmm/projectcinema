@@ -128,7 +128,7 @@ while ($row = $result->fetch_assoc()) {
                         <li>Snack bar</li>
                     </ul>
 
-                    <button class="theatre-showtimes-btn" data-cinema="North">
+                    <button class="theatre-showtimes-btn" data-cinema="Yishun">
                         View Showtimes
                     </button>
                 </article>
@@ -153,21 +153,39 @@ while ($row = $result->fetch_assoc()) {
                              data-cinema="<?php echo htmlspecialchars($cinema); ?>"
                              data-date="<?php echo htmlspecialchars($date); ?>"
                              hidden>
-
-                            <?php foreach ($movies as $movie => $times) { ?>
-                                <div class="theatre-movie-showtimes">
-                                    <h4><?php echo htmlspecialchars($movie); ?></h4>
-
-                                    <div class="showtime-buttons">
-                                        <?php foreach ($times as $screening) { ?>
-                                            <a href="booking.php?screeningId=<?php echo (int)$screening['screening_id']; ?>"
-                                               class="showtime-btn">
-                                                <?php echo date("g:i A", strtotime($screening['screening_time'])); ?>
-                                            </a>
+                            <div class="theatre-table-wrapper">
+                                <table class="theatre-screenings-table">
+                                    <caption>
+                                        <?php echo htmlspecialchars($cinema); ?> screenings on
+                                        <?php echo date("j M Y", strtotime($date)); ?>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Movie</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($movies as $movie => $times) { ?>
+                                            <?php foreach ($times as $screening) { ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo htmlspecialchars($movie); ?></th>
+                                                    <td><?php echo date("j M Y", strtotime($screening['screening_date'])); ?></td>
+                                                    <td><?php echo date("g:i A", strtotime($screening['screening_time'])); ?></td>
+                                                    <td>
+                                                        <a href="booking.php?screeningId=<?php echo (int)$screening['screening_id']; ?>"
+                                                           class="showtime-btn">
+                                                            Select seats
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         <?php } ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     <?php } ?>
                 <?php } ?>
