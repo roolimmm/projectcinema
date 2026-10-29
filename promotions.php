@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promotions | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -16,10 +18,13 @@
 
         <nav>
             <a href="index.php">Home</a>
-            <a href="index.php#movies">Movies</a>
+            <a href="movie.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
             <a href="bookings.html">My Bookings</a>
+            <a href="cart.php" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
         </nav>
     </header>
 

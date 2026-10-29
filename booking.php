@@ -48,6 +48,8 @@ $seatStmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Seats | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
     <header class="site-header">
@@ -58,6 +60,9 @@ $seatStmt->close();
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
             <a href="bookings.html">My Bookings</a>
+            <a href="cart.php" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
         </nav>
     </header>
 
@@ -117,9 +122,29 @@ $seatStmt->close();
                     <span>Tickets</span>
                     <strong id="selected-seat-count">0</strong>
                 </div>
-                <button type="button" id="add-seats-to-cart" class="seat-cart-button" disabled>
+                <form action="cart.php" method="POST" id="seat-booking-form">
+                    <input
+                       type="hidden"
+                       name="screening_id"
+                       value="<?php echo $screeningId; ?>"
+                    >
+
+                    <input
+                       type="hidden"
+                       name="selected_seats"
+                       id="selected-seats-input"
+                    >
+
+                    <button
+                       type="submit"
+                       name="add_to_cart"
+                       id="add-seats-to-cart"
+                       class="seat-cart-button"
+                       disabled
+                    >
                     Add to Cart
-                </button>
+                    </button>
+                </form>
             </aside>
         </div>
     </main>
@@ -128,6 +153,6 @@ $seatStmt->close();
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>
