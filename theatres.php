@@ -51,7 +51,7 @@ while ($row = $result->fetch_assoc()) {
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
-            <a href="bookings.html">My Bookings</a>
+            <a href="bookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
