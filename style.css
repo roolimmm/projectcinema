@@ -531,6 +531,135 @@ button {
     cursor: pointer;
 }
 
+.screening-calendar-input-enhanced {
+    display: none !important;
+}
+
+.screening-week-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 390px;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #383840;
+    border-radius: 7px;
+    background: #17171d;
+    color: #eeeeee;
+}
+
+.screening-week-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.screening-week-label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.screening-week-button {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    border: 1px solid #44444b;
+    border-radius: 5px;
+    background: #24242b;
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.screening-week-button:hover:not(:disabled) {
+    background: #b91c2c;
+}
+
+.screening-week-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.screening-week-dates {
+    display: flex;
+    gap: 5px;
+}
+
+.screening-week-date {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 5px 2px;
+    border: 1px solid #8e2632;
+    border-radius: 5px;
+    background: #321b22;
+    color: #ffb5bd;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.screening-week-date:hover {
+    border-color: #e50914;
+    background: #4a2029;
+}
+
+.screening-week-date[aria-pressed="true"] {
+    border-color: #e50914;
+    background: #b91c2c;
+    color: #ffffff;
+}
+
+.screening-week-date-day {
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.screening-week-date-number {
+    font-size: 15px;
+}
+
+.screening-week-date:focus-visible,
+.screening-week-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.screening-week-hint {
+    margin: 0;
+    color: #999999;
+    font-size: 11px;
+}
+
+.theatre-showtimes-panel .screening-calendar {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+@media (max-width: 400px) {
+    .screening-week-picker {
+        padding: 8px;
+    }
+
+    .screening-week-dates {
+        gap: 3px;
+    }
+
+    .screening-week-date-day {
+        font-size: 10px;
+    }
+}
+
 .coming-soon-label {
     display: inline-block;
     margin-top: 30px;
@@ -1792,4 +1921,202 @@ button {
     text-align: center;
 
     font-size: 13px;
+}
+
+/* Booking lookup */
+.booking-lookup-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 55px 30px 80px;
+}
+
+.booking-lookup-card,
+.booking-result {
+    padding: 30px;
+    border: 1px solid #33333b;
+    border-radius: 8px;
+    background: #1c1c22;
+}
+
+.booking-lookup-card h3,
+.booking-result h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.booking-lookup-help,
+.booking-order-date {
+    margin: 0 0 22px;
+    color: #bbbbbb;
+    line-height: 1.6;
+}
+
+.booking-lookup-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 14px;
+    align-items: center;
+}
+
+.booking-lookup-form label {
+    grid-column: 1 / -1;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.booking-lookup-form input {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border: 1px solid #55555d;
+    border-radius: 5px;
+    background: #101014;
+    color: #ffffff;
+    font: inherit;
+}
+
+.booking-lookup-form input:focus-visible,
+.booking-lookup-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+.booking-lookup-form span {
+    grid-column: 1 / -1;
+    color: #999999;
+    font-size: 12px;
+}
+
+.booking-lookup-button {
+    padding: 13px 20px;
+    border: 0;
+    border-radius: 5px;
+    background: #b91c2c;
+    color: #ffffff;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.booking-lookup-button:hover {
+    background: #e50914;
+}
+
+.booking-lookup-error {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #8e2632;
+    border-radius: 5px;
+    background: #32121d;
+    color: #ffb5bd;
+    line-height: 1.5;
+}
+
+.booking-result {
+    margin-top: 30px;
+}
+
+.booking-result-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.booking-result-header .card-kicker {
+    margin-top: 0;
+}
+
+.booking-order-reference {
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 12px;
+    text-align: right;
+}
+
+.booking-order-reference strong {
+    color: #ffb5bd;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.booking-order-date {
+    margin-bottom: 24px;
+    font-size: 13px;
+}
+
+.booking-ticket-list {
+    display: grid;
+    gap: 14px;
+}
+
+.booking-ticket-card {
+    padding: 20px;
+    border: 1px solid #33333b;
+    border-radius: 6px;
+    background: #17171d;
+}
+
+.booking-ticket-card h4 {
+    margin: 0 0 14px;
+    color: #ffffff;
+    font-size: 19px;
+}
+
+.booking-ticket-card p {
+    margin: 7px 0;
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.booking-ticket-card .booking-ticket-total {
+    margin-top: 14px;
+    color: #ffffff;
+}
+
+.booking-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 20px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid #44444b;
+    color: #cccccc;
+}
+
+.booking-total strong {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+@media (max-width: 600px) {
+    .booking-lookup-content {
+        padding: 35px 18px 55px;
+    }
+
+    .booking-lookup-card,
+    .booking-result {
+        padding: 22px 18px;
+    }
+
+    .booking-lookup-form {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-lookup-button {
+        width: 100%;
+    }
+
+    .booking-result-header {
+        flex-direction: column;
+    }
+
+    .booking-order-reference {
+        text-align: left;
+    }
 }

@@ -83,7 +83,37 @@ INSERT INTO `screenings` (`screening_id`, `movie_id`, `cinema`, `screening_date`
 (2, 1, 'Harbour', '2026-10-27', '19:00:00'),
 (3, 1, 'Yishun', '2026-10-27', '15:45:00'),
 (4, 1, 'Yishun', '2026-10-28', '14:00:00'),
-(5, 1, 'Orchard', '2026-10-28', '20:30:00');
+(5, 1, 'Orchard', '2026-10-28', '20:30:00'),
+(6, 1, 'Orchard', '2026-11-01', '13:30:00'),
+(7, 1, 'Orchard', '2026-11-01', '19:15:00'),
+(8, 1, 'Harbour', '2026-11-02', '18:30:00'),
+(9, 1, 'Yishun', '2026-11-04', '19:00:00'),
+(10, 1, 'Harbour', '2026-11-06', '16:00:00'),
+(11, 1, 'Yishun', '2026-11-07', '20:00:00'),
+(12, 2, 'Harbour', '2026-11-01', '16:00:00'),
+(13, 2, 'Yishun', '2026-11-02', '20:15:00'),
+(14, 2, 'Orchard', '2026-11-03', '18:45:00'),
+(15, 2, 'Harbour', '2026-11-04', '20:30:00'),
+(16, 2, 'Yishun', '2026-11-06', '17:00:00'),
+(17, 2, 'Orchard', '2026-11-07', '20:30:00'),
+(18, 5, 'Yishun', '2026-11-01', '11:30:00'),
+(19, 5, 'Orchard', '2026-11-02', '20:00:00'),
+(20, 5, 'Harbour', '2026-11-03', '17:30:00'),
+(21, 5, 'Yishun', '2026-11-05', '19:45:00'),
+(22, 5, 'Orchard', '2026-11-06', '16:30:00'),
+(23, 5, 'Harbour', '2026-11-07', '20:15:00'),
+(24, 8, 'Orchard', '2026-11-01', '20:00:00'),
+(25, 8, 'Harbour', '2026-11-02', '19:30:00'),
+(26, 8, 'Yishun', '2026-11-03', '18:00:00'),
+(27, 8, 'Orchard', '2026-11-04', '20:30:00'),
+(28, 8, 'Harbour', '2026-11-06', '19:45:00'),
+(29, 8, 'Yishun', '2026-11-07', '20:30:00'),
+(30, 9, 'Harbour', '2026-11-01', '10:30:00'),
+(31, 9, 'Yishun', '2026-11-02', '14:00:00'),
+(32, 9, 'Orchard', '2026-11-03', '15:30:00'),
+(33, 9, 'Harbour', '2026-11-05', '11:00:00'),
+(34, 9, 'Yishun', '2026-11-06', '14:30:00'),
+(35, 9, 'Orchard', '2026-11-07', '11:30:00');
 
 -- --------------------------------------------------------
 
@@ -96,6 +126,25 @@ CREATE TABLE `screening_seats` (
   `screening_id` int(11) NOT NULL,
   `seat_label` varchar(4) NOT NULL,
   `status` enum('available','unavailable') NOT NULL DEFAULT 'available'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Orders use a random 32-character hexadecimal ID as the customer-facing reference.
+CREATE TABLE `orders` (
+  `order_id` char(32) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `order_tickets` (
+  `order_ticket_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` char(32) NOT NULL,
+  `screening_id` int(11) NOT NULL,
+  `seat_label` varchar(4) NOT NULL,
+  `ticket_price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`order_ticket_id`),
+  UNIQUE KEY `screening_seat_ordered` (`screening_id`, `seat_label`),
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -161,7 +210,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `screenings`
 --
 ALTER TABLE `screenings`
-  MODIFY `screening_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `screening_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 ALTER TABLE `screening_seats`
   MODIFY `screening_seat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
@@ -178,6 +227,10 @@ ALTER TABLE `screenings`
 
 ALTER TABLE `screening_seats`
   ADD CONSTRAINT `screening_seats_ibfk_1` FOREIGN KEY (`screening_id`) REFERENCES `screenings` (`screening_id`) ON DELETE CASCADE;
+
+ALTER TABLE `order_tickets`
+  ADD CONSTRAINT `order_tickets_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_tickets_ibfk_2` FOREIGN KEY (`screening_id`) REFERENCES `screenings` (`screening_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

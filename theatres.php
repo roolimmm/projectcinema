@@ -35,7 +35,7 @@ while ($row = $result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theatres | RaZor Theatres</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -51,7 +51,7 @@ while ($row = $result->fetch_assoc()) {
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
-            <a href="booking.php">My Bookings</a>
+            <a href="viewbookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
@@ -147,8 +147,8 @@ while ($row = $result->fetch_assoc()) {
                     </button>
                 </div>
 
-                <div class="screening-calendar">
-                    <label for="theatre-screening-date">Select Date:</label>
+                <div class="screening-calendar" data-screening-calendar="theatre">
+                    <span id="theatre-screening-date-label" class="screening-calendar-label">Select Date:</span>
                     <input type="date" id="theatre-screening-date" min="<?php echo date('Y-m-d'); ?>">
                 </div>
 
@@ -229,6 +229,6 @@ while ($row = $result->fetch_assoc()) {
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>

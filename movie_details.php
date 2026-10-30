@@ -65,7 +65,7 @@ $selectedDate = !empty($screenings)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($movie['title']); ?> | RaZor Theatres</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=6">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -81,7 +81,7 @@ $selectedDate = !empty($screenings)
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
-            <a href="booking.php">My Bookings</a>
+            <a href="viewbookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
@@ -135,7 +135,7 @@ $selectedDate = !empty($screenings)
                             <div class="showtimes-header">
                                 <h3>Showtimes</h3>
 
-                                <div class="screening-calendar">
+                                <div class="screening-calendar" data-screening-calendar="movie">
                                     <input
                                         type="date"
                                         id="screening-date"
@@ -192,6 +192,6 @@ $selectedDate = !empty($screenings)
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>

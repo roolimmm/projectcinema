@@ -56,10 +56,10 @@ $seatStmt->close();
         <a href="index.php" class="logo"><h1>RaZor Theatres</h1></a>
         <nav>
             <a href="index.php">Home</a>
-            <a href="index.php#movies">Movies</a>
+            <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
-            <a href="booking.php">My Bookings</a>
+            <a href="viewbookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>

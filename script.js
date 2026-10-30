@@ -63,11 +63,245 @@ document.addEventListener("DOMContentLoaded", function () {
     // MOVIE SCREENING DATE PICKER
     // ==================================
 
+    function createScreeningCalendar(datePicker, getAvailableDates) {
+        const calendar = document.createElement("div");
+        calendar.className = "screening-week-picker";
+        calendar.setAttribute("role", "group");
+
+        const label = datePicker.labels && datePicker.labels.length > 0
+            ? datePicker.labels[0]
+            : datePicker.parentElement.querySelector(".screening-calendar-label");
+
+        if (label) {
+            if (!label.id) {
+                label.id = datePicker.id + "-label";
+            }
+            calendar.setAttribute("aria-labelledby", label.id);
+        } else {
+            calendar.setAttribute(
+                "aria-label",
+                datePicker.getAttribute("aria-label") || "Choose a screening date"
+            );
+        }
+
+        const monthControls = document.createElement("div");
+        monthControls.className = "screening-week-controls";
+
+        const previousButton = document.createElement("button");
+        previousButton.type = "button";
+        previousButton.className = "screening-week-button";
+        previousButton.setAttribute("aria-label", "Previous week with screenings");
+        previousButton.textContent = "\u2039";
+
+        const weekLabel = document.createElement("span");
+        weekLabel.className = "screening-week-label";
+        weekLabel.setAttribute("aria-live", "polite");
+
+        const nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.className = "screening-week-button";
+        nextButton.setAttribute("aria-label", "Next week with screenings");
+        nextButton.textContent = "\u203a";
+
+        monthControls.append(previousButton, weekLabel, nextButton);
+
+        const days = document.createElement("div");
+        days.className = "screening-week-dates";
+
+        const hint = document.createElement("p");
+        hint.className = "screening-week-hint";
+        hint.textContent = "Choose a date with screenings.";
+
+        calendar.append(monthControls, days, hint);
+        datePicker.insertAdjacentElement("afterend", calendar);
+
+        let visibleWeek;
+
+        function parseDate(value) {
+            const parts = value.split("-").map(Number);
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+        }
+
+        function dateString(date) {
+            return [
+                date.getFullYear(),
+                String(date.getMonth() + 1).padStart(2, "0"),
+                String(date.getDate()).padStart(2, "0")
+            ].join("-");
+        }
+
+        function getAvailableWeeks() {
+            const weeks = new Map();
+
+            Array.from(new Set(getAvailableDates()))
+                .filter(Boolean)
+                .sort()
+                .forEach(function (value) {
+                    const date = parseDate(value);
+                    const firstDay = new Date(
+                        date.getFullYear(),
+                        date.getMonth(),
+                        date.getDate() - date.getDay()
+                    );
+                    const weekKey = dateString(firstDay);
+
+                    if (!weeks.has(weekKey)) {
+                        weeks.set(weekKey, []);
+                    }
+
+                    weeks.get(weekKey).push(value);
+                });
+
+            return Array.from(weeks.entries()).map(function (week) {
+                return {
+                    start: week[0],
+                    dates: week[1]
+                };
+            });
+        }
+
+        function render(resetWeek) {
+            const selectedValue = datePicker.value || datePicker.min;
+            const weeks = getAvailableWeeks();
+            days.replaceChildren();
+
+            if (weeks.length === 0) {
+                visibleWeek = "";
+                weekLabel.textContent = "No upcoming screenings";
+                previousButton.disabled = true;
+                nextButton.disabled = true;
+                hint.hidden = true;
+                return;
+            }
+
+            if (resetWeek || !visibleWeek) {
+                const selectedDate = weeks.find(function (week) {
+                    return week.dates.includes(selectedValue);
+                });
+                visibleWeek = selectedDate
+                    ? selectedDate.start
+                    : weeks[0].start;
+            }
+
+            let visibleWeekIndex = weeks.findIndex(function (week) {
+                return week.start === visibleWeek;
+            });
+
+            if (visibleWeekIndex < 0) {
+                visibleWeekIndex = 0;
+                visibleWeek = weeks[0].start;
+            }
+
+            const currentWeek = weeks[visibleWeekIndex];
+            const weekStart = parseDate(currentWeek.start);
+            const weekEnd = new Date(
+                weekStart.getFullYear(),
+                weekStart.getMonth(),
+                weekStart.getDate() + 6
+            );
+            const startLabel = new Intl.DateTimeFormat(undefined, {
+                month: "short",
+                day: "numeric"
+            }).format(weekStart);
+            const endLabel = new Intl.DateTimeFormat(undefined, {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }).format(weekEnd);
+
+            weekLabel.textContent = startLabel + " \u2013 " + endLabel;
+            previousButton.disabled = visibleWeekIndex === 0;
+            nextButton.disabled = visibleWeekIndex === weeks.length - 1;
+            hint.hidden = false;
+
+            currentWeek.dates.forEach(function (value) {
+                const date = parseDate(value);
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "screening-week-date";
+                button.classList.add("has-screenings");
+                button.setAttribute(
+                    "aria-label",
+                    new Intl.DateTimeFormat(undefined, {
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric"
+                    }).format(date)
+                );
+                button.title = "View screenings";
+
+                if (value === selectedValue) {
+                    button.setAttribute("aria-pressed", "true");
+                } else {
+                    button.setAttribute("aria-pressed", "false");
+                }
+
+                const weekday = document.createElement("span");
+                weekday.className = "screening-week-date-day";
+                weekday.textContent = new Intl.DateTimeFormat(undefined, {
+                    weekday: "short"
+                }).format(date);
+
+                const dayNumber = document.createElement("strong");
+                dayNumber.className = "screening-week-date-number";
+                dayNumber.textContent = String(date.getDate());
+
+                button.append(weekday, dayNumber);
+                button.addEventListener("click", function () {
+                    datePicker.value = value;
+                    datePicker.dispatchEvent(new Event("change", { bubbles: true }));
+                });
+                days.appendChild(button);
+            });
+        }
+
+        function moveWeek(direction) {
+            const weeks = getAvailableWeeks();
+            const currentIndex = weeks.findIndex(function (week) {
+                return week.start === visibleWeek;
+            });
+            const nextWeek = weeks[currentIndex + direction];
+
+            if (!nextWeek) {
+                return;
+            }
+
+            visibleWeek = nextWeek.start;
+            datePicker.value = nextWeek.dates[0];
+            datePicker.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+
+        previousButton.addEventListener("click", function () {
+            moveWeek(-1);
+        });
+
+        nextButton.addEventListener("click", function () {
+            moveWeek(1);
+        });
+
+        datePicker.classList.add("screening-calendar-input-enhanced");
+        datePicker.tabIndex = -1;
+        datePicker.setAttribute("aria-hidden", "true");
+
+        return {
+            render: render
+        };
+    }
+
     const datePicker = document.getElementById("screening-date");
 
     if (datePicker) {
         const screeningDates = document.querySelectorAll(".screening-date");
         const noScreenings = document.getElementById("no-screenings");
+        const movieCalendar = createScreeningCalendar(
+            datePicker,
+            function () {
+                return Array.from(screeningDates).map(function (section) {
+                    return section.dataset.date;
+                });
+            }
+        );
 
         function updateScreenings() {
             const selectedDate = datePicker.value;
@@ -85,9 +319,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (noScreenings) {
                 noScreenings.hidden = hasScreenings;
             }
+
+            movieCalendar.render(false);
         }
 
         datePicker.addEventListener("change", updateScreenings);
+        movieCalendar.render(true);
         updateScreenings();
     }
 
@@ -106,6 +343,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (theatrePanel && theatreDatePicker) {
         let selectedCinema = "";
+        const theatreCalendar = createScreeningCalendar(
+            theatreDatePicker,
+            function () {
+                return Array.from(theatreGroups)
+                    .filter(function (group) {
+                        return group.dataset.cinema === selectedCinema;
+                    })
+                    .map(function (group) {
+                        return group.dataset.date;
+                    });
+            }
+        );
 
         function updateTheatreScreenings() {
             const selectedDate = theatreDatePicker.value;
@@ -126,6 +375,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (theatreNoScreenings) {
                 theatreNoScreenings.hidden = hasScreenings;
             }
+
+            theatreCalendar.render(false);
         }
 
         theatreButtons.forEach(function (button) {
@@ -157,6 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 theatreDatePicker.value = availableDates.length > 0
                     ? availableDates[0]
                     : theatreDatePicker.min;
+                theatreCalendar.render(true);
 
                 theatrePanel.hidden = false;
                 updateTheatreScreenings();
@@ -169,6 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         theatreDatePicker.addEventListener("change", updateTheatreScreenings);
+        theatreCalendar.render(true);
 
         if (closeTheatreButton) {
             closeTheatreButton.addEventListener("click", function () {
