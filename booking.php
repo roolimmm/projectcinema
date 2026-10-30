@@ -59,7 +59,7 @@ $seatStmt->close();
             <a href="index.php#movies">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
-            <a href="bookings.php">My Bookings</a>
+            <a href="booking.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
