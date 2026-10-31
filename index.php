@@ -63,7 +63,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                     Discover stories worth watching.
                 </p>
 
-                <a href="#movies" class="hero-btn">
+                <a href="movies.php" class="hero-btn">
                     Explore Movies
                 </a>
             </div>

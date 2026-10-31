@@ -2,10 +2,6 @@
 <?php
 require_once "db_connect.php";
 
-// ==================================
-// RETRIEVE MOVIES FROM DATABASE
-// ==================================
-
 $query = "
     SELECT
         movie_id,
@@ -36,19 +32,11 @@ while ($movie = $result->fetch_assoc()) {
     }
 }
 
-// ==================================
-// FUNCTION TO DISPLAY MOVIE CARDS
-// ==================================
-
 function displayMovieCard($movie, $showReleaseDate = false) {
     $movieId = (int) $movie['movie_id'];
     $movieUrl = "movie_details.php?movieId=" . $movieId;
 ?>
-
     <article class="movies-page-card">
-
-        <!-- MOVIE POSTER -->
-
         <a
             href="<?php echo $movieUrl; ?>"
             class="movies-page-poster-link"
@@ -61,23 +49,17 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             >
         </a>
 
-
-        <!-- MOVIE INFORMATION -->
-
         <div class="movies-page-card-info">
-
             <h3>
                 <?php echo htmlspecialchars($movie['title']); ?>
             </h3>
 
-
-            <!-- RATING, GENRE AND DURATION -->
-
             <div class="movies-page-meta-row">
-
-                <span class="movies-page-rating">
-                    <?php echo htmlspecialchars($movie['rating'] ?? 'N/A'); ?>
-                </span>
+                <img
+                    src="images/ratings/<?php echo htmlspecialchars(strtolower($movie['rating'] ?? '')); ?>.webp"
+                    alt="<?php echo htmlspecialchars($movie['rating'] ?? ''); ?> rating"
+                    class="details-rating"
+                >
 
                 <span>
                     <?php echo htmlspecialchars($movie['genre'] ?? ''); ?>
@@ -86,26 +68,16 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                 <span>
                     <?php echo (int) $movie['duration']; ?> min
                 </span>
-
             </div>
-
-
-            <!-- ADVISORY -->
 
             <p class="movies-page-advisory">
                 <strong>Advisory:</strong>
                 <?php echo htmlspecialchars($movie['advisory'] ?: 'None'); ?>
             </p>
 
-
-            <!-- MOVIE DESCRIPTION -->
-
             <p class="movies-page-synopsis">
                 <?php echo htmlspecialchars($movie['synopsis'] ?? ''); ?>
             </p>
-
-
-            <!-- RELEASE DATE FOR COMING SOON -->
 
             <?php if ($showReleaseDate && !empty($movie['release_date'])) { ?>
 
@@ -121,20 +93,14 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 
             <?php } ?>
 
-
-            <!-- VIEW DETAILS -->
-
             <a
                 href="<?php echo $movieUrl; ?>"
                 class="movies-page-details-button"
             >
                 View Details
             </a>
-
         </div>
-
     </article>
-
 <?php
 }
 ?>
@@ -157,11 +123,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 </head>
 
 <body>
-
-    <!-- ==================================
-         HEADER
-         ================================== -->
-
     <header class="site-header">
 
         <a href="index.php" class="logo">
@@ -170,7 +131,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 
         <nav>
             <a href="index.php">Home</a>
-            <a href="movies.php" class="active">Movies</a>
+            <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
             <a href="promotions.php">Promotions</a>
             <a href="viewbookings.php">My Bookings</a>
@@ -186,33 +147,16 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 
     </header>
 
-
-    <!-- ==================================
-         MOVIES PAGE
-         ================================== -->
-
     <main class="movies-page">
-
-        <!-- PAGE HEADING -->
-
         <div class="movies-page-header">
-
             <h2>Movies</h2>
-
             <p>
                 Explore the latest movies and upcoming releases
                 at RaZor Theatres.
             </p>
-
         </div>
 
-
-        <!-- ==================================
-             MOVIE TABS
-             ================================== -->
-
         <div class="movies-page-tabs">
-
             <button
                 type="button"
                 id="now-showing-tab"
@@ -228,21 +172,13 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             >
                 Coming Soon
             </button>
-
         </div>
-
-
-        <!-- ==================================
-             NOW SHOWING
-             ================================== -->
 
         <section
             id="now-showing-content"
             class="movies-page-section"
         >
-
             <?php if (!empty($nowShowing)) { ?>
-
                 <div class="movies-page-grid">
 
                     <?php foreach ($nowShowing as $movie) { ?>
@@ -252,70 +188,42 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                     <?php } ?>
 
                 </div>
-
             <?php } else { ?>
-
                 <p class="movies-page-empty">
                     No movies are currently showing.
                 </p>
-
             <?php } ?>
-
         </section>
-
-
-        <!-- ==================================
-             COMING SOON
-             ================================== -->
 
         <section
             id="coming-soon-content"
             class="movies-page-section"
             hidden
         >
-
             <?php if (!empty($comingSoon)) { ?>
-
                 <div class="movies-page-grid">
-
                     <?php foreach ($comingSoon as $movie) { ?>
 
                         <?php displayMovieCard($movie, true); ?>
 
                     <?php } ?>
-
                 </div>
 
             <?php } else { ?>
-
                 <p class="movies-page-empty">
                     No upcoming movies at the moment.
                 </p>
-
             <?php } ?>
-
         </section>
-
     </main>
 
-
-    <!-- ==================================
-         FOOTER
-         ================================== -->
-
     <footer class="site-footer">
-
         <p>
             &copy; 2026 RaZor Theatres.
             All Rights Reserved.
         </p>
-
     </footer>
 
-
-    <!-- EXISTING JAVASCRIPT -->
-
     <script src="script.js?v=3"></script>
-
 </body>
 </html>

@@ -90,7 +90,7 @@ $selectedDate = !empty($screenings)
 
     <main>
         <section class="movie-details-section">
-            <a href="index.php#movies" class="back-link">
+            <a href="movies.php" class="back-link">
                 &larr; Back to Movies List
             </a>
 
