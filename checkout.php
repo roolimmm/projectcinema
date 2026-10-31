@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $seenSeats = [];
 
             $seatStmt = $db->prepare("
-                SELECT screening_seat_id
+                SELECT seat_label
                 FROM screening_seats
                 WHERE screening_id = ?
                   AND seat_label = ?
@@ -77,8 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $selectedTickets[] = [
                         'screening_id' => $screeningId,
-                        'seat_label' => $seatLabel,
-                        'screening_seat_id' => (int) $seat['screening_seat_id']
+                        'seat_label' => $seatLabel
                     ];
                 }
             }
@@ -109,14 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateStmt = $db->prepare("
                 UPDATE screening_seats
                 SET status = 'unavailable'
-                WHERE screening_seat_id = ?
+                                WHERE screening_id = ?
+                                    AND seat_label = ?
                   AND status = 'available'
             ");
 
             foreach ($selectedTickets as $ticket) {
                 $screeningId = $ticket['screening_id'];
                 $seatLabel = $ticket['seat_label'];
-                $seatId = $ticket['screening_seat_id'];
 
                 $ticketStmt->bind_param(
                     "sisd",
@@ -127,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
                 $ticketStmt->execute();
 
-                $updateStmt->bind_param("i", $seatId);
+                $updateStmt->bind_param("is", $screeningId, $seatLabel);
                 $updateStmt->execute();
 
                 if ($updateStmt->affected_rows !== 1) {
