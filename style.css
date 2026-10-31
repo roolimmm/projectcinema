@@ -1284,6 +1284,38 @@ button {
     }
 }
 
+.booking-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.booking-progress a {
+    color: #a1a1aa;
+    text-decoration: none;
+}
+
+.booking-progress a:hover {
+    color: #ffffff;
+}
+
+.booking-progress span {
+    color: #71717a;
+}
+
+.booking-progress .current {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.booking-progress a::after,
+.booking-progress span:not(:last-child)::after {
+    content: "›";
+    color: #71717a;
+    margin-left: 12px;
+}
 
 /* ==============================
    SHOPPING CART
@@ -1323,7 +1355,7 @@ button {
     background: #1c1c22;
     border: 1px solid #333;
     border-radius: 12px;
-    padding: 25px;
+    padding: 50px 25px;
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -1441,21 +1473,23 @@ button {
     margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-    .cart-layout {
-        grid-template-columns: 1fr;
-    }
 
-    .cart-item {
-        flex-direction: column;
-    }
-
-    .cart-item-actions {
-        flex-direction: row;
-        align-items: center;
-    }
+.cart-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
 }
 
+.cart-edit-link {
+    color: #f87171;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.cart-edit-link:hover {
+    text-decoration: underline;
+}
 
 /* ==================================
    MOVIES PAGE

@@ -68,9 +68,14 @@ $seatStmt->close();
 
     <main class="seat-selection-page">
         <div class="seat-selection-header">
-            <a href="movie_details.php?movieId=<?php echo (int) $screening['movie_id']; ?>" class="back-link">
-                &larr; Back to Showtimes
-            </a>
+            <nav class="booking-progress" aria-label="Booking progress">
+                <a href="movie_details.php?movieId=<?php echo (int) $screening['movie_id']; ?>">
+                    Showtimes
+                </a>
+                <span class="current" aria-current="step">Seat Booking</span>
+                <span>Cart</span>
+                <span>Checkout</span>
+            </nav>
             <h2>Select Seats</h2>
             <p>
                 <strong><?php echo htmlspecialchars($screening['title']); ?></strong>

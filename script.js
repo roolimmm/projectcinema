@@ -535,4 +535,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateSeatCart();
     }
-});
+
+    const checkoutForm = document.getElementById("checkout-form");
+    
+    if (checkoutForm) {
+        checkoutForm.addEventListener("submit", function (event) {
+            const email = document.getElementById("customer_email").value.trim();
+            const phone = document.getElementById("customer_phone").value.trim();
+
+            const emailRegex = /^[\w.-]+@(?:\w+\.){1,3}\w{2,3}$/;
+            const phoneRegex = /^\+[1-9]\d{1,14}$/;
+            
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid phone number with country code (e.g. +6591234567).");
+                event.preventDefault();
+                return;
+            }
+        });
+    }       
+}
+);

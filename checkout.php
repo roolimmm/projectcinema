@@ -21,15 +21,19 @@ foreach ($cart as $item) {
 $totalPrice = $totalTickets * $ticketPrice;
 $name = "";
 $email = "";
+$phone = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['customer_name'] ?? '');
     $email = trim($_POST['customer_email'] ?? '');
+    $phone = trim($_POST['customer_phone'] ?? '');
 
     if ($name === '' || strlen($name) > 100) {
         $error = "Please enter a valid name.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 255) {
+    } elseif (!preg_match('/^[\w.-]+@(?:\w+\.){1,3}\w{2,3}$/', $email) || strlen($email) > 255) {
         $error = "Please enter a valid email address.";
+    } elseif (!preg_match('/^\+[1-9][0-9]{1,14}$/', $phone)) {
+        $error = "Please enter a valid phone number with country code (e.g. +6591234567).";
     } else {
         try {
             $db->begin_transaction();
@@ -142,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $_SESSION['last_order_id'] = $orderId;
 
-            header("Location: booking_confirmation.php");
+            header("Location: confirmation.php");
             exit();
 
         } catch (Throwable $e) {
@@ -164,8 +168,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
+    link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+
+<header class="site-header">
+    <a href="index.php" class="logo">
+        <h1>RaZor Theatres</h1>
+    </a>
+    <nav>
+        <a href="index.php">Home</a>
+        <a href="movies.php">Movies</a>
+        <a href="theatres.php">Theatres</a>
+        <a href="promotions.php">Promotions</a>
+        <a href="booking.php">My Bookings</a>
+        <a href="cart.php"
+            class="nav-cart active"
+            aria-label="Cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </nav>
+</header>
 
 <main class="checkout-page">
     <a href="cart.php" class="checkout-back">&larr; Back to Cart</a>
@@ -203,6 +227,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     name="customer_email"
                     maxlength="255"
                     value="<?php echo htmlspecialchars($email); ?>"
+                    required
+                >
+
+                <label for="customer_phone">Phone Number</label>
+                <input
+                    type="tel"
+                    id="customer_phone"
+                    name="customer_phone"
+                    maxlength="16"
+                    placeholder="e.g. +6591234567"
+                    value="<?php echo htmlspecialchars($phone); ?>"
                     required
                 >
 
@@ -262,6 +297,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </aside>
     </div>
 </main>
-
+<script src="script.js"></script>
 </body>
 </html>
