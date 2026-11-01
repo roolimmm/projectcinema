@@ -122,10 +122,11 @@ INSERT INTO `screenings` (`screening_id`, `movie_id`, `cinema`, `screening_date`
 --
 
 CREATE TABLE `screening_seats` (
-  `screening_seat_id` int(11) NOT NULL,
+  `screening_seat_id` int(11) NOT NULL AUTO_INCREMENT,
   `screening_id` int(11) NOT NULL,
   `seat_label` varchar(4) NOT NULL,
-  `status` enum('available','unavailable') NOT NULL DEFAULT 'available'
+  `status` enum('available','unavailable') NOT NULL DEFAULT 'available',
+  PRIMARY KEY (`screening_seat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Orders use a random 32-character hexadecimal ID as the customer-facing reference.
@@ -192,7 +193,6 @@ ALTER TABLE `screenings`
 -- Indexes for table `screening_seats`
 --
 ALTER TABLE `screening_seats`
-  ADD PRIMARY KEY (`screening_seat_id`),
   ADD UNIQUE KEY `screening_seat` (`screening_id`, `seat_label`),
   ADD KEY `screening_id` (`screening_id`);
 

@@ -97,7 +97,7 @@ $seatStmt->close();
                             <span class="seat-row-label" aria-hidden="true"><?php echo $row; ?></span>
                             <?php for ($seat = 1; $seat <= $seatCount; $seat++) {
                                 $seatNumber = $row . $seat;
-                                $occupied = ($seatStatuses[$seatNumber] ?? 'available') !== 'available';
+                                $occupied = ($seatStatuses[$seatNumber] ?? 'unavailable') !== 'available';
                             ?>
                                 <button
                                     type="button"
