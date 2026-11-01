@@ -169,7 +169,6 @@ while ($row = $result->fetch_assoc()) {
                                             <th scope="col">Movie</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Time</th>
-                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -178,11 +177,10 @@ while ($row = $result->fetch_assoc()) {
                                                 <tr>
                                                     <th scope="row"><?php echo htmlspecialchars($movie); ?></th>
                                                     <td><?php echo date("j M Y", strtotime($screening['screening_date'])); ?></td>
-                                                    <td><?php echo date("g:i A", strtotime($screening['screening_time'])); ?></td>
                                                     <td>
                                                         <a href="booking.php?screeningId=<?php echo (int)$screening['screening_id']; ?>"
-                                                           class="showtime-btn">
-                                                            Select seats
+                                                        class="showtime-btn">
+                                                        <?php echo date("g:i A", strtotime($screening['screening_time'])); ?>
                                                         </a>
                                                     </td>
                                                 </tr>
