@@ -51,6 +51,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
     </header>
 
     <main>
+        <!-- Hero Banner -->
         <section class="hero-banner">
             <div class="hero-content">
                 <p class="hero-label">
@@ -62,13 +63,10 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 <p>
                     Discover stories worth watching.
                 </p>
-
-                <a href="movies.php" class="hero-btn">
-                    Explore Movies
-                </a>
             </div>
         </section>
 
+        <!-- Movie Catalogue -->
         <section id="movies" class="movie-section">
             <div class="movie-tabs">
                 <button
@@ -86,6 +84,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </button>
             </div>
 
+            <!-- Now Showing -->
             <div id="now-showing-content" class="movie-category">
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -93,7 +92,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                     </button>
 
                     <div class="movie-carousel">
-                        <?php while ($movie = $nowShowingResult->fetch_assoc()) {?>
+                        <?php while ($movie = $nowShowingResult->fetch_assoc()) { ?>
                             <div class="movie-card">
                                 <img
                                     src="<?php echo htmlspecialchars($movie['poster_url']); ?>"
@@ -111,21 +110,21 @@ if (!$nowShowingResult || !$comingSoonResult) {
                                     </p>
 
                                     <img
-                                    src="images/ratings/<?php echo htmlspecialchars($movie['rating']); ?>.webp"
-                                    alt="<?php echo htmlspecialchars($movie['rating']); ?> rating"
-                                    class="movie-rating-img"
+                                        src="images/ratings/<?php echo htmlspecialchars($movie['rating']); ?>.webp"
+                                        alt="<?php echo htmlspecialchars($movie['rating']); ?> rating"
+                                        class="movie-rating-img"
                                     >
 
                                     <p class="movie-advisory">
                                         <?php echo htmlspecialchars($movie['advisory'] ?? ''); ?>
                                     </p>
 
-                                    <a href="movie_details.php?movieId=<?php echo (int)$movie['movie_id']; ?>" class="buy-btn">
-                                       BUY TICKETS
+                                    <a href="movie_details.php?movieId=<?php echo (int)$movie['movie_id']; ?>"
+                                       class="buy-btn">
+                                        BUY TICKETS
                                     </a>
                                 </div>
                             </div>
-
                         <?php } ?>
                     </div>
 
@@ -135,6 +134,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
+            <!-- Coming Soon -->
             <div id="coming-soon-content" class="movie-category" hidden>
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -179,7 +179,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
 
                                     <a href="movie_details.php?movieId=<?php echo (int)$movie['movie_id']; ?>"
                                        class="buy-btn">
-                                       VIEW DETAILS
+                                        VIEW DETAILS
                                     </a>
                                 </div>
                             </div>
@@ -191,6 +191,14 @@ if (!$nowShowingResult || !$comingSoonResult) {
                     </button>
                 </div>
             </div>
+
+            <!-- Explore Movies button below the carousels -->
+            <div class="explore-movies-container">
+                <a href="movies.php" class="hero-btn">
+                    Explore Movies
+                </a>
+            </div>
+
         </section>
     </main>
 

@@ -59,12 +59,12 @@ button {
 
 /*Hero Banner*/
 .hero-banner {
-    min-height: 380px;
+    min-height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 50px 20px;
+    padding: 35px 20px;
 
     background: radial-gradient(
         ellipse at center,
@@ -73,6 +73,7 @@ button {
         #101014 100%
     );
 }
+
 
 .hero-content {
     max-width: 700px;
@@ -85,8 +86,8 @@ button {
 }
 
 .hero-content h2 {
-    font-size: 48px;
-    margin: 18px 0;
+    font-size: 42px;
+    margin: 15px 0;
 }
 
 .hero-content p {
@@ -112,10 +113,22 @@ button {
 }
 
 
+.explore-movies-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.explore-movies-container .hero-btn {
+    margin-top: 0;
+}
+
+
 /*Movie Section*/
 .movie-section {
     max-width: 1300px;
-    margin: 55px auto 80px;
+    margin: 35px auto 80px;
     padding: 0 5%;
 }
 
