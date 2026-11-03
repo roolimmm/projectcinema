@@ -1731,6 +1731,119 @@ button {
     display: none;
 }
 
+.movies-page-card[hidden],
+.movies-page-grid[hidden],
+.movies-page-empty[hidden] {
+    display: none;
+}
+
+.movies-page-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) repeat(2, auto);
+    align-items: end;
+    gap: 18px;
+    margin: 0 0 32px;
+    padding: 22px;
+    border: 1px solid #303038;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1a1a21, #15151a);
+}
+
+.movies-page-filter {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.movies-page-filter label {
+    color: #d4d4d8;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.movies-page-filter select,
+.movies-page-apply-filters,
+.movies-page-clear-filters {
+    min-height: 46px;
+    border: 1px solid #41414b;
+    border-radius: 7px;
+    background-color: #222229;
+    color: #ffffff;
+    padding: 0 14px;
+    font: inherit;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.movies-page-filter select {
+    width: 100%;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23a1a1aa' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m1 1 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+.movies-page-filter select:hover,
+.movies-page-apply-filters:hover,
+.movies-page-clear-filters:hover {
+    border-color: #777780;
+    background-color: #292930;
+}
+
+.movies-page-filter select:focus-visible,
+.movies-page-apply-filters:focus-visible,
+.movies-page-clear-filters:focus-visible {
+    outline: 2px solid #d11f35;
+    outline-offset: 2px;
+}
+
+.movies-page-apply-filters,
+.movies-page-clear-filters {
+    min-width: 140px;
+    border-color: #55515a;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.movies-page-apply-filters {
+    min-width: 150px;
+    border-color: #b91c2c;
+    background: #b91c2c;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.movies-page-apply-filters:hover {
+    border-color: #d11f35;
+    background-color: #d11f35;
+}
+
+.movies-page-apply-filters:focus-visible {
+    outline-color: #f05a68;
+}
+
+.movies-page-filter-status {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: #a1a1aa;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .movies-page-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .movies-page-apply-filters,
+    .movies-page-clear-filters {
+        width: 100%;
+    }
+}
+
 
 /* ==================================
    HORIZONTAL MOVIE LIST
@@ -1940,6 +2053,20 @@ button {
     .movies-page-tab {
         padding: 12px;
         font-size: 14px;
+    }
+
+    .movies-page-filters {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .movies-page-clear-filters {
+        width: 100%;
+    }
+
+    .movies-page-filter-status {
+        grid-column: auto;
     }
 }
 

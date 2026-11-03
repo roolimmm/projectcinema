@@ -29,6 +29,95 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    const genreFilter = document.getElementById("movie-genre-filter");
+    const ratingFilter = document.getElementById("movie-rating-filter");
+    const applyMovieFiltersButton = document.getElementById("apply-movie-filters");
+    const clearMovieFilters = document.getElementById("clear-movie-filters");
+    const movieFilterStatus = document.getElementById("movie-filter-status");
+
+    if (genreFilter && ratingFilter) {
+        const movieSections = [
+            {
+                section: nowShowingContent,
+                emptyMessage: "No movies are currently showing."
+            },
+            {
+                section: comingSoonContent,
+                emptyMessage: "No upcoming movies at the moment."
+            }
+        ].filter(function (item) {
+            return item.section;
+        });
+
+        function applyMovieFilters() {
+            let activeSectionMovies = 0;
+            let activeSectionMatches = 0;
+
+            movieSections.forEach(function (item) {
+                const cards = Array.from(item.section.querySelectorAll(".movies-page-card"));
+                const grid = item.section.querySelector(".movies-page-grid");
+                const emptyMessage = item.section.querySelector(".movies-page-empty");
+                let sectionMatches = 0;
+                const isActiveSection = !item.section.hidden;
+
+                cards.forEach(function (card) {
+                    const matchesGenre = !genreFilter.value
+                        || card.dataset.genre === genreFilter.value;
+                    const matchesRating = !ratingFilter.value
+                        || card.dataset.rating === ratingFilter.value;
+                    const matches = matchesGenre && matchesRating;
+
+                    card.hidden = !matches;
+                    if (matches) {
+                        sectionMatches += 1;
+                    }
+                });
+
+                if (isActiveSection) {
+                    activeSectionMovies = cards.length;
+                    activeSectionMatches = sectionMatches;
+                }
+
+                if (grid) {
+                    grid.hidden = sectionMatches === 0;
+                }
+
+                if (emptyMessage) {
+                    emptyMessage.hidden = sectionMatches > 0;
+                    emptyMessage.textContent = cards.length === 0
+                        ? item.emptyMessage
+                        : "No movies match the selected filters.";
+                }
+            });
+
+            if (movieFilterStatus) {
+                movieFilterStatus.textContent = genreFilter.value || ratingFilter.value
+                    ? activeSectionMatches + " of " + activeSectionMovies + " movies match your filters."
+                    : "Showing all " + activeSectionMovies + " movies.";
+            }
+        }
+
+        if (applyMovieFiltersButton) {
+            applyMovieFiltersButton.addEventListener("click", applyMovieFilters);
+        }
+
+        [nowShowingTab, comingSoonTab].forEach(function (tab) {
+            if (tab) {
+                tab.addEventListener("click", applyMovieFilters);
+            }
+        });
+
+        if (clearMovieFilters) {
+            clearMovieFilters.addEventListener("click", function () {
+                genreFilter.value = "";
+                ratingFilter.value = "";
+                applyMovieFilters();
+            });
+        }
+
+        applyMovieFilters();
+    }
+
 
     // ==================================
     // MOVIE CAROUSELS
