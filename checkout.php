@@ -22,14 +22,18 @@ $totalPrice = $totalTickets * $ticketPrice;
 $name = "";
 $email = "";
 $phone = "";
+$confirmEmail = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['customer_name'] ?? '');
     $email = trim($_POST['customer_email'] ?? '');
     $phone = trim($_POST['customer_phone'] ?? '');
+    $confirmEmail = trim($_POST['confirm_email'] ?? '');
 
     if ($name === '' || strlen($name) > 100) {
         $error = "Please enter a valid name.";
+    } elseif ($email !== $confirmEmail) {
+        $error = "The email addresses do not match.";
     } elseif (!preg_match('/^[\w.-]+@(?:\w+\.){1,3}\w{2,3}$/', $email) || strlen($email) > 255) {
         $error = "Please enter a valid email address.";
     } elseif (!preg_match('/^\+[1-9][0-9]{1,14}$/', $phone)) {
@@ -181,7 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="index.php">Home</a>
         <a href="movies.php">Movies</a>
         <a href="theatres.php">Theatres</a>
-        <a href="promotions.php">Promotions</a>
         <a href="booking.php">My Bookings</a>
         <a href="cart.php"
             class="nav-cart active"
@@ -229,6 +232,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     value="<?php echo htmlspecialchars($email); ?>"
                     required
                 >
+                
+                <label for="confirm_email">Confirm Email Address</label>
+                <input
+                    type="email"
+                    id="confirm_email"
+                    name="confirm_email"
+                    maxlength="255"
+                    value="<?php echo htmlspecialchars($confirmEmail); ?>"
+                    required
+                >
 
                 <label for="customer_phone">Phone Number</label>
                 <input
@@ -257,22 +270,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php foreach ($cart as $item) { ?>
                 <div class="checkout-movie">
                     <h3><?php echo htmlspecialchars($item['title']); ?></h3>
-
                     <p>
                         Cinema:
                         <?php echo htmlspecialchars($item['cinema']); ?>
                     </p>
-
                     <p>
                         Date:
                         <?php echo htmlspecialchars($item['date']); ?>
                     </p>
-
                     <p>
                         Time:
                         <?php echo htmlspecialchars(substr($item['time'], 0, 5)); ?>
                     </p>
-
                     <p>
                         Seats:
                         <?php echo htmlspecialchars(implode(', ', $item['seats'])); ?>

@@ -42,7 +42,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.php">Promotions</a>
             <a href="viewbookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -51,7 +50,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
     </header>
 
     <main>
-        <!-- Hero Banner -->
         <section class="hero-banner">
             <div class="hero-content">
                 <p class="hero-label">
@@ -66,7 +64,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
             </div>
         </section>
 
-        <!-- Movie Catalogue -->
         <section id="movies" class="movie-section">
             <div class="movie-tabs">
                 <button
@@ -84,7 +81,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </button>
             </div>
 
-            <!-- Now Showing -->
             <div id="now-showing-content" class="movie-category">
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -134,7 +130,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
-            <!-- Coming Soon -->
             <div id="coming-soon-content" class="movie-category" hidden>
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -192,7 +187,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
-            <!-- Explore Movies button below the carousels -->
             <div class="explore-movies-container">
                 <a href="movies.php" class="hero-btn">
                     Explore Movies

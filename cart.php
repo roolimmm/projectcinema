@@ -133,11 +133,8 @@ $totalPrice = $totalTickets * $ticketPrice;
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.php">Promotions</a>
             <a href="viewbookings.php">My Bookings</a>
-            <a href="cart.php"
-               class="nav-cart active"
-               aria-label="Cart">
+            <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
         </nav>
@@ -190,9 +187,7 @@ $totalPrice = $totalTickets * $ticketPrice;
                                 </p>
                             </div>
 
-                            <form method="POST"
-                                  action="cart.php"
-                                  class="cart-remove-form">
+                            <form method="POST" action="cart.php" class="cart-remove-form">
                                 <input
                                     type="hidden"
                                     name="remove_index"
@@ -227,12 +222,10 @@ $totalPrice = $totalTickets * $ticketPrice;
                         </strong>
                     </div>
 
-                    <a href="checkout.php"
-                       class="checkout-button cart-checkout-button">
+                    <a href="checkout.php" class="checkout-button cart-checkout-button">
                         Proceed to Checkout
                     </a>
-                    <a href="movies.php"
-                       class="cart-continue-link">
+                    <a href="movies.php" class="cart-continue-link">
                         Continue Browsing Movies
                     </a>
                 </aside>
@@ -245,8 +238,7 @@ $totalPrice = $totalTickets * $ticketPrice;
                 <p>
                     You haven't selected any movie tickets yet.
                 </p>
-                <a href="movies.php"
-                   class="checkout-button cart-browse-button">
+                <a href="movies.php" class="checkout-button cart-browse-button">
                     Browse Movies
                 </a>
             </div>

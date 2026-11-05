@@ -26,7 +26,6 @@ $genres = [];
 $ratings = [];
 
 while ($movie = $result->fetch_assoc()) {
-
     if ($movie['status'] === 'now-showing') {
         $nowShowing[] = $movie;
     } elseif ($movie['status'] === 'coming-soon') {
@@ -37,7 +36,6 @@ while ($movie = $result->fetch_assoc()) {
         if (!empty($movie['genre'])) {
             $genres[] = $movie['genre'];
         }
-
         if (!empty($movie['rating'])) {
             $ratings[] = $movie['rating'];
         }
@@ -81,11 +79,9 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                     alt="<?php echo htmlspecialchars($movie['rating'] ?? ''); ?> rating"
                     class="details-rating"
                 >
-
                 <span>
                     <?php echo htmlspecialchars($movie['genre'] ?? ''); ?>
                 </span>
-
                 <span>
                     <?php echo (int) $movie['duration']; ?> min
                 </span>
@@ -101,7 +97,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             </p>
 
             <?php if ($showReleaseDate && !empty($movie['release_date'])) { ?>
-
                 <p class="movies-page-release">
                     <strong>Release Date:</strong>
                     <?php
@@ -111,7 +106,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                         );
                     ?>
                 </p>
-
             <?php } ?>
 
             <a
@@ -132,11 +126,8 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Movies | RaZor Theatres</title>
-
     <link rel="stylesheet" href="style.css?v=5">
-
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -145,7 +136,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 
 <body>
     <header class="site-header">
-
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
         </a>
@@ -154,18 +144,11 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.php">Promotions</a>
             <a href="viewbookings.php">My Bookings</a>
-
-            <a
-                href="cart.php"
-                class="nav-cart"
-                aria-label="View shopping cart"
-            >
+            <a href="cart.php" class="nav-cart">
                 <i class="fa-solid fa-cart-shopping"></i>
             </a>
         </nav>
-
     </header>
 
     <main class="movies-page">

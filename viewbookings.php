@@ -124,10 +124,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
             <a href="theatres.php">Theatres</a>
-            <a href="promotions.php">Promotions</a>
-            <a href="viewbookings.php" aria-current="page">My Bookings</a>
-            <a href="cart.php" class="nav-cart" aria-label="View shopping cart">
-                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            <a href="viewbookings.php">My Bookings</a>
+            <a href="cart.php" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
             </a>
         </nav>
     </header>
