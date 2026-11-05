@@ -2,6 +2,7 @@
 <?php
 require_once "db_connect.php";
 
+// retrieve movies
 $nowShowingQuery = "SELECT * FROM movies
                     WHERE status = 'now-showing'
                     ORDER BY release_date ASC";
@@ -33,6 +34,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
 </head>
 
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -51,7 +53,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
     </header>
 
     <main>
-        <!-- Hero Banner -->
+        <!-- hero banner -->
         <section class="hero-banner">
             <div class="hero-content">
                 <p class="hero-label">
@@ -66,7 +68,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
             </div>
         </section>
 
-        <!-- Movie Catalogue -->
+        <!-- movie tab options -->
         <section id="movies" class="movie-section">
             <div class="movie-tabs">
                 <button
@@ -84,7 +86,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </button>
             </div>
 
-            <!-- Now Showing -->
+            <!-- movie carousel -->
             <div id="now-showing-content" class="movie-category">
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -134,7 +136,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
-            <!-- Coming Soon -->
+            <!-- movie carousel for upcoming movie -->
             <div id="coming-soon-content" class="movie-category" hidden>
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -192,7 +194,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
-            <!-- Explore Movies button below the carousels -->
             <div class="explore-movies-container">
                 <a href="movies.php" class="hero-btn">
                     Explore Movies
@@ -202,6 +203,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

@@ -2,6 +2,7 @@
 <?php
 require_once "db_connect.php";
 
+// load the movie fields for filters.
 $query = "
     SELECT
         movie_id,
@@ -27,6 +28,7 @@ $ratings = [];
 
 while ($movie = $result->fetch_assoc()) {
 
+    // separate movies into the two tabs, collect filter options
     if ($movie['status'] === 'now-showing') {
         $nowShowing[] = $movie;
     } elseif ($movie['status'] === 'coming-soon') {
@@ -49,6 +51,7 @@ $genres = array_unique($genres);
 sort($ratings, SORT_NATURAL | SORT_FLAG_CASE);
 $ratings = array_unique($ratings);
 
+// ensure both catalogue tabs use the same layout
 function displayMovieCard($movie, $showReleaseDate = false) {
     $movieId = (int) $movie['movie_id'];
     $movieUrl = "movie_details.php?movieId=" . $movieId;
@@ -149,7 +152,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
         </a>
-
+        <!-- nav header -->
         <nav>
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
@@ -259,6 +262,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

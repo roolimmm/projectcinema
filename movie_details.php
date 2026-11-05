@@ -2,6 +2,7 @@
 <?php
 require_once "db_connect.php";
 
+// reject invalid movie IDs before loading.
 if (!isset($_GET['movieId']) || !ctype_digit($_GET['movieId'])) {
     header("Location: index.php");
     exit();
@@ -9,6 +10,7 @@ if (!isset($_GET['movieId']) || !ctype_digit($_GET['movieId'])) {
 
 $movieId = (int) $_GET['movieId'];
 
+// load movies
 $query = "SELECT * FROM movies WHERE movie_id = ?";
 $stmt = $db->prepare($query);
 $stmt->bind_param("i", $movieId);
@@ -29,6 +31,7 @@ if (!empty($movie['release_date'])) {
     $releaseDate = date("d M Y", strtotime($movie['release_date']));
 }
 
+// group showtimes for the date picker.
 $screeningQuery = "
     SELECT *
     FROM screenings
@@ -71,6 +74,7 @@ $selectedDate = !empty($screenings)
 </head>
 
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -89,6 +93,7 @@ $selectedDate = !empty($screenings)
     </header>
 
     <main>
+        <!-- movie info -->
         <section class="movie-details-section">
             <a href="movies.php" class="back-link">
                 &larr; Back to Movies List
@@ -188,6 +193,7 @@ $selectedDate = !empty($screenings)
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>

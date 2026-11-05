@@ -1,5 +1,6 @@
 
 <?php
+// retain PHP session
 session_start();
 require_once "db_connect.php";
 
@@ -7,6 +8,7 @@ $ticketPrice = 15.00;
 $error = "";
 $cart = $_SESSION['cart'] ?? [];
 
+// cart should not be empty
 if (empty($cart)) {
     header("Location: cart.php");
     exit();
@@ -19,11 +21,14 @@ foreach ($cart as $item) {
 }
 
 $totalPrice = $totalTickets * $ticketPrice;
+
+// remember submitted values so customers can correct a form error without retyping
 $name = "";
 $email = "";
 $phone = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // trim whitespace and validate customer details server-side.
     $name = trim($_POST['customer_name'] ?? '');
     $email = trim($_POST['customer_email'] ?? '');
     $phone = trim($_POST['customer_phone'] ?? '');
@@ -36,12 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Please enter a valid phone number with country code (e.g. +6591234567).";
     } else {
         try {
+            // ensure checks and updates are isolated from other checkouts
             $db->begin_transaction();
 
             $selectedTickets = [];
             $seenSeats = [];
 
-            $seatStmt = $db->prepare("
+            // Lock each available seat while checking it so another checkout cannot claim it at the same time
+            $seatStmt = $db->prepare(" 
                 SELECT seat_label
                 FROM screening_seats
                 WHERE screening_id = ?
@@ -57,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $seatLabel = trim($seatLabel);
                     $key = $screeningId . ':' . $seatLabel;
 
+                    // track screening-and-seat pairs to reject duplicate entries.
                     if (isset($seenSeats[$key])) {
                         throw new Exception("Duplicate seat detected.");
                     }
@@ -90,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $orderId = bin2hex(random_bytes(16));
 
+            // create one order record and use its random ID as customer reference
             $orderStmt = $db->prepare("
                 INSERT INTO orders (order_id, total_amount)
                 VALUES (?, ?)
@@ -99,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $orderStmt->execute();
             $orderStmt->close();
 
+            // prepare inserts for individual tickets and updates for their seat statuses
             $ticketStmt = $db->prepare("
                 INSERT INTO order_tickets
                     (order_id, screening_id, seat_label, ticket_price)
@@ -136,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
+            // save all database changes, clear cart and show confirmation.
             $ticketStmt->close();
             $updateStmt->close();
 
@@ -149,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
 
         } catch (Throwable $e) {
+            // undo partial database changes and show a message if any step failed
             $db->rollback();
             error_log($e->getMessage());
 
@@ -173,6 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+<!-- nav header -->
 <header class="site-header">
     <a href="index.php" class="logo">
         <h1>RaZor Theatres</h1>
@@ -192,6 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </header>
 
 <main class="checkout-page">
+    <!-- link back to the cart and show any server-side validation or booking error. -->
     <a href="cart.php" class="checkout-back">&larr; Back to Cart</a>
 
     <h1>Checkout</h1>
@@ -206,6 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php } ?>
 
     <div class="checkout-layout">
+        <!-- order form -->
         <section class="checkout-panel">
             <h2>Customer Details</h2>
 
@@ -251,6 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </section>
 
+        <!-- order summary -->
         <aside class="checkout-panel">
             <h2>Order Summary</h2>
 

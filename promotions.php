@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!-- Shared site navigation provides links to the catalogue and booking tools. -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -29,6 +30,7 @@
     </header>
 
     <main>
+        <!-- Introduce the current offers and explain their main terms. -->
         <section class="page-banner">
             <div class="page-banner-content">
                 <p class="hero-label">A LITTLE MORE TO LOVE</p>
@@ -40,6 +42,7 @@
             </div>
         </section>
 
+        <!-- Each article presents one promotion, eligibility details, and a movie link. -->
         <section class="content-section" aria-labelledby="promotion-list-heading">
             <h3 id="promotion-list-heading">Happening Now</h3>
             <p class="content-intro">
