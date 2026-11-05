@@ -2,6 +2,7 @@
 <?php
 require_once "db_connect.php";
 
+// retrieve movies
 $nowShowingQuery = "SELECT * FROM movies
                     WHERE status = 'now-showing'
                     ORDER BY release_date ASC";
@@ -33,6 +34,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
 </head>
 
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -50,6 +52,10 @@ if (!$nowShowingResult || !$comingSoonResult) {
     </header>
 
     <main>
+<<<<<<< HEAD
+=======
+        <!-- hero banner -->
+>>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
         <section class="hero-banner">
             <div class="hero-content">
                 <p class="hero-label">
@@ -64,6 +70,10 @@ if (!$nowShowingResult || !$comingSoonResult) {
             </div>
         </section>
 
+<<<<<<< HEAD
+=======
+        <!-- movie tab options -->
+>>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
         <section id="movies" class="movie-section">
             <div class="movie-tabs">
                 <button
@@ -81,6 +91,10 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </button>
             </div>
 
+<<<<<<< HEAD
+=======
+            <!-- movie carousel -->
+>>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
             <div id="now-showing-content" class="movie-category">
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -130,6 +144,10 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
+<<<<<<< HEAD
+=======
+            <!-- movie carousel for upcoming movie -->
+>>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
             <div id="coming-soon-content" class="movie-category" hidden>
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -196,6 +214,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

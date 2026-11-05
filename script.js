@@ -1,9 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+    //wait until page elements exist before attaching any interactive behavior.
 
-    // ==================================
-    // MOVIE TABS
-    // ==================================
+    // show one movie category and hide the other when a tab is clicked.
 
     const nowShowingTab = document.getElementById("now-showing-tab");
     const comingSoonTab = document.getElementById("coming-soon-tab");
@@ -29,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // read optional catalogue filters in movies.php.
     const genreFilter = document.getElementById("movie-genre-filter");
     const ratingFilter = document.getElementById("movie-rating-filter");
     const applyMovieFiltersButton = document.getElementById("apply-movie-filters");
@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return item.section;
         });
 
+        // hide cards that do not match both selected filters and update empty-state text.
         function applyMovieFilters() {
             let activeSectionMovies = 0;
             let activeSectionMatches = 0;
@@ -119,9 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==================================
-    // MOVIE CAROUSELS
-    // ==================================
+    // scroll movie carousel left or right
 
     const carousels = document.querySelectorAll(".carousel-container");
 
@@ -148,10 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // ==================================
-    // MOVIE SCREENING DATE PICKER
-    // ==================================
+    // build an week view from dates with screenings.
 
+    // reusable date selector that displays only dates returned by its page
     function createScreeningCalendar(datePicker, getAvailableDates) {
         const calendar = document.createElement("div");
         calendar.className = "screening-week-picker";
@@ -219,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ].join("-");
         }
 
+        // group dates by calendar week so week navigation skips empty weeks
         function getAvailableWeeks() {
             const weeks = new Map();
 
@@ -249,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        // draw selected week, update navigation buttons, mark active date.
         function render(resetWeek) {
             const selectedValue = datePicker.value || datePicker.min;
             const weeks = getAvailableWeeks();
@@ -345,6 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        // move to the adjacent week that has screenings and select its first date.
         function moveWeek(direction) {
             const weeks = getAvailableWeeks();
             const currentIndex = weeks.findIndex(function (week) {
@@ -392,6 +393,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
+        // show only the movie showtime group matching selected calendar date
         function updateScreenings() {
             const selectedDate = datePicker.value;
             let hasScreenings = false;
@@ -417,10 +419,8 @@ document.addEventListener("DOMContentLoaded", function () {
         updateScreenings();
     }
 
-
-    // ==================================
-    // THEATRE SHOWTIMES
-    // ==================================
+    // schedule
+    // open a location's schedule and filter it by date.
 
     const theatreButtons = document.querySelectorAll(".theatre-showtimes-btn");
     const theatrePanel = document.getElementById("theatre-showtimes-panel");
@@ -445,6 +445,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
+        // show schedule rows only when both the selected theatre and date match
         function updateTheatreScreenings() {
             const selectedDate = theatreDatePicker.value;
             let hasScreenings = false;
@@ -521,9 +522,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==================================
-    // SEAT SELECTION AND ADD TO CART
-    // ==================================
+    // seat selection
+    // keep the chosen seat buttons, summary, count, and form in sync
 
     const seatButtons = document.querySelectorAll(".seat-button:not(.occupied)");
     const selectedSeatsList = document.getElementById("selected-seats-list");
@@ -541,6 +541,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const selectedSeats = new Set();
 
+        // rebuild the selected-seat list and submit the selected labels to cart.php
         function updateSeatCart() {
 
             selectedSeatsList.replaceChildren();
@@ -625,6 +626,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSeatCart();
     }
 
+    // do browser-side checks before checkout with additional PHP checks for security
     const checkoutForm = document.getElementById("checkout-form");
     
     if (checkoutForm) {

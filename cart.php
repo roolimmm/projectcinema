@@ -1,11 +1,16 @@
 <?php
+// retain PHP session so selected tickets are remembered
 session_start();
 require_once "db_connect.php";
+
+// if new session, start with empty cart and initialise ticket price
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 $error = "";
 $ticketPrice = 15.00;
+
+// handle seat-selection from booking.php
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['add_to_cart'])) {
     $screeningId = filter_input(INPUT_POST, 'screening_id', FILTER_VALIDATE_INT);
@@ -16,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
         in_array('', $selectedSeats, true)) {
         $error = "Please select at least one valid seat.";
     } else {
+        // check screening id is valid before adding seats
         $query = "
             SELECT
                 s.screening_id,
@@ -28,14 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
                 ON s.movie_id = m.movie_id
             WHERE s.screening_id = ?
         ";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("i", $screeningId);
+        $stmt = $db->prepare($query);           //send sql
+        $stmt->bind_param("i", $screeningId);   //bind screening id to query
         $stmt->execute();
         $screening = $stmt->get_result()->fetch_assoc();
         $stmt->close();
         if (!$screening) {
             $error = "The selected screening could not be found.";
         } else {
+            // recheck seats against the database
             $seatQuery = "
                 SELECT seat_label
                 FROM screening_seats
@@ -58,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
                 }
             }
             if ($error === "") {
+                // combine seats with an existing screening entry or add a new entry
                 $existingIndex = null;
                 foreach ($_SESSION['cart'] as $index => $item) {
                     if ($item['screening_id'] == $screeningId) {
@@ -67,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
                 }
                 if ($existingIndex !== null) {
                     $_SESSION['cart'][$existingIndex]['seats'] =
-                        array_values(
-                            array_unique(
-                                array_merge(
+                        array_values(                   //reindex array
+                            array_unique(               //remove duplicates
+                                array_merge(            //combine seats in cart with newly selected seats
                                     $_SESSION['cart'][$existingIndex]['seats'],
                                     $selectedSeats
                                 )
@@ -85,12 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
                         'seats' => $selectedSeats
                     ];
                 }
+                // redirect after a successful update to prevent resubmission of the form on page refresh
                 header("Location: cart.php");
                 exit();
             }
         }
     }
 }
+
+// remove a cart entry only when the submitted array index is a valid number
 if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['remove_index'])
     && ctype_digit((string) $_POST['remove_index'])) {
@@ -102,6 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     header("Location: cart.php");
     exit();
 }
+
+// calculate the ticket count and cost
 $cart = $_SESSION['cart'];
 $totalTickets = 0;
 foreach ($cart as $item) {
@@ -125,6 +138,7 @@ $totalPrice = $totalTickets * $ticketPrice;
 </head>
 <body>
 
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -141,6 +155,7 @@ $totalPrice = $totalTickets * $ticketPrice;
     </header>
 
     <main class="cart-page">
+        <!-- display validation errors -->
         <div class="cart-page-header">
             <h2>Cart</h2>
             <p>
@@ -155,6 +170,7 @@ $totalPrice = $totalTickets * $ticketPrice;
             </div>
         <?php } ?>
         <?php if (!empty($cart)) { ?>
+            <!-- show each screening's tickets with summary -->
             <div class="cart-layout">
 
                 <section class="cart-items">
@@ -245,6 +261,7 @@ $totalPrice = $totalTickets * $ticketPrice;
         <?php } ?>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

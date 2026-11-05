@@ -2,6 +2,7 @@
 <?php
 require_once "db_connect.php";
 
+// load upcoming sessions
 $query = "
     SELECT
         s.screening_id,
@@ -20,6 +21,7 @@ $result = $db->query($query);
 $screenings = [];
 
 while ($row = $result->fetch_assoc()) {
+    // render schedule
     $cinema = $row['cinema'];
     $date = $row['screening_date'];
     $movie = $row['title'];
@@ -41,6 +43,7 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -138,6 +141,7 @@ while ($row = $result->fetch_assoc()) {
                 </article>
             </div>
 
+            <!-- JavaScript reveals table and filters by theatre and date. -->
             <section class="theatre-showtimes-panel" id="theatre-showtimes-panel" hidden>
                 <div class="theatre-showtimes-header">
                     <h3 id="selected-theatre-name">Showtimes</h3>
@@ -222,6 +226,7 @@ while ($row = $result->fetch_assoc()) {
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>

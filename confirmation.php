@@ -1,8 +1,10 @@
 
 <?php
+// Reuse the session
 session_start();
 require_once "db_connect.php";
 
+// display confirmation if session contains a recent order reference
 if (!isset($_SESSION['last_order_id'])) {
     header("Location: index.php");
     exit();
@@ -10,6 +12,7 @@ if (!isset($_SESSION['last_order_id'])) {
 
 $orderId = $_SESSION['last_order_id'];
 
+// retrieve the order total and booking time using its unique reference
 $stmt = $db->prepare("
     SELECT order_id, total_amount, created_at
     FROM orders
@@ -26,6 +29,7 @@ if (!$order) {
     exit();
 }
 
+// fetch the ordered tickets with their screening and movie details to display
 $ticketStmt = $db->prepare("
     SELECT
         m.title,
@@ -58,6 +62,7 @@ $ticketStmt->close();
 </head>
 <body>
 
+<!-- booking reference and ticket details -->
 <main class="checkout-page">
     <section class="checkout-panel confirmation-panel">
         <div class="confirmation-icon">&#10003;</div>

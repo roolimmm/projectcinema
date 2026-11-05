@@ -1,6 +1,8 @@
 <?php
+// load shared database connection
 require_once "db_connect.php";
 
+// only a numeric screening ID allowed, invalid requests return to home page
 if (!isset($_GET['screeningId']) || !ctype_digit($_GET['screeningId'])) {
     header("Location: index.php");
     exit();
@@ -8,6 +10,7 @@ if (!isset($_GET['screeningId']) || !ctype_digit($_GET['screeningId'])) {
 
 $screeningId = (int) $_GET['screeningId'];
 
+// Fetch the selected screening + movie details shown on this page
 $query = "
     SELECT s.*, m.title, m.poster_url, m.rating
     FROM screenings s
@@ -21,6 +24,7 @@ $result = $stmt->get_result();
 $screening = $result->fetch_assoc();
 $stmt->close();
 
+// check if ID actually links to an actual screening, if not, return to home page
 if (!$screening) {
     header("Location: index.php");
     exit();
@@ -28,6 +32,7 @@ if (!$screening) {
 
 $rows = range('A', 'H');
 $seatCount = 10;
+// load seat availability to mark booked or missing seats as unavailable
 $seatQuery = "SELECT seat_label, status FROM screening_seats WHERE screening_id = ?";
 $seatStmt = $db->prepare($seatQuery);
 $seatStmt->bind_param("i", $screeningId);
@@ -52,6 +57,7 @@ $seatStmt->close();
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo"><h1>RaZor Theatres</h1></a>
         <nav>
@@ -66,6 +72,7 @@ $seatStmt->close();
     </header>
 
     <main class="seat-selection-page">
+        <!-- shows current booking step, and identify the chosen screening. -->
         <div class="seat-selection-header">
             <nav class="booking-progress" aria-label="Booking progress">
                 <a href="movie_details.php?movieId=<?php echo (int) $screening['movie_id']; ?>">
@@ -85,6 +92,7 @@ $seatStmt->close();
         </div>
 
         <div class="seat-layout-container">
+            <!-- render seating plan and disable any seat not marked available -->
             <section class="cinema-seat-plan" aria-labelledby="seat-plan-heading">
                 <h3 id="seat-plan-heading" class="visually-hidden">Cinema seating plan</h3>
                 <div class="screen-label">Screen</div>
@@ -118,6 +126,7 @@ $seatStmt->close();
                 </div>
             </section>
 
+            <!-- summary updates using javascript and submitted to cart handler. -->
             <aside class="seat-cart" aria-labelledby="seat-cart-heading">
                 <h3 id="seat-cart-heading">Your Seats</h3>
                 <p id="seat-cart-empty">No seats selected.</p>
@@ -153,6 +162,7 @@ $seatStmt->close();
         </div>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>

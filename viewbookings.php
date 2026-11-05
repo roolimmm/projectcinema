@@ -7,6 +7,7 @@ $order = null;
 $ticketsByScreening = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // normalize and validate the submitted order ID
     $submittedOrderId = $_POST['order_id'] ?? '';
     $orderId = is_string($submittedOrderId)
         ? strtolower(trim($submittedOrderId))
@@ -16,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         || !preg_match('/\A[a-f0-9]{32}\z/i', $orderId)) {
         $error = "Enter the 32-character order ID from your confirmation.";
     } else {
+        // look up the order
         $orderQuery = "
             SELECT order_id, total_amount, created_at
             FROM orders
@@ -41,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($order) {
+            // retrieve ticket details
             $ticketQuery = "
                 SELECT
                     s.screening_id,
@@ -73,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     while ($ticket = $ticketResult->fetch_assoc()) {
                         $screeningKey = (string) $ticket['screening_id'];
 
+                        // create group first time this screening appears
                         if (!isset($ticketsByScreening[$screeningKey])) {
                             $ticketsByScreening[$screeningKey] = [
                                 'title' => $ticket['title'],
@@ -115,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -225,6 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 
+    <!-- copyright footer -->
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>
