@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     //wait until page elements exist before attaching any interactive behavior.
 
-    // show one movie category and hide the other when a tab is clicked.
-
+    // INDEX.PHP
+    // show one movie category and hide the other when a tab is clicked
     const nowShowingTab = document.getElementById("now-showing-tab");
     const comingSoonTab = document.getElementById("coming-soon-tab");
 
@@ -28,7 +28,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // read optional catalogue filters in movies.php.
+    // scroll movie carousel left or right
+    const carousels = document.querySelectorAll(".carousel-container");
+
+    carousels.forEach(function (container) {
+        const carousel = container.querySelector(".movie-carousel");
+        const prevButton = container.querySelector(".carousel-prev");
+        const nextButton = container.querySelector(".carousel-next");
+
+        if (carousel && prevButton && nextButton) {
+            prevButton.addEventListener("click", function () {
+                carousel.scrollBy({
+                    left: -225,
+                    behavior: "smooth"
+                });
+            });
+
+            nextButton.addEventListener("click", function () {
+                carousel.scrollBy({
+                    left: 225,
+                    behavior: "smooth"
+                });
+            });
+        }
+    });
+
+
+    // MOVIES.PHP
+    // read catalogue filters in movies.php
     const genreFilter = document.getElementById("movie-genre-filter");
     const ratingFilter = document.getElementById("movie-rating-filter");
     const applyMovieFiltersButton = document.getElementById("apply-movie-filters");
@@ -49,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return item.section;
         });
 
-        // hide cards that do not match both selected filters and update empty-state text.
+        // hide cards that do not match both selected filters and update empty-state text
         function applyMovieFilters() {
             let activeSectionMovies = 0;
             let activeSectionMatches = 0;
@@ -119,36 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
         applyMovieFilters();
     }
 
-
-    // scroll movie carousel left or right
-
-    const carousels = document.querySelectorAll(".carousel-container");
-
-    carousels.forEach(function (container) {
-        const carousel = container.querySelector(".movie-carousel");
-        const prevButton = container.querySelector(".carousel-prev");
-        const nextButton = container.querySelector(".carousel-next");
-
-        if (carousel && prevButton && nextButton) {
-            prevButton.addEventListener("click", function () {
-                carousel.scrollBy({
-                    left: -225,
-                    behavior: "smooth"
-                });
-            });
-
-            nextButton.addEventListener("click", function () {
-                carousel.scrollBy({
-                    left: 225,
-                    behavior: "smooth"
-                });
-            });
-        }
-    });
-
-
+    // MOVIE_DETAILS.PHP & THEATRES.PHP
     // build an week view from dates with screenings.
-
     // reusable date selector that displays only dates returned by its page
     function createScreeningCalendar(datePicker, getAvailableDates) {
         const calendar = document.createElement("div");
@@ -419,6 +418,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateScreenings();
     }
 
+    // THEATRES.PHP
     // schedule
     // open a location's schedule and filter it by date.
 
@@ -521,7 +521,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
+    // BOOKING.PHP
     // seat selection
     // keep the chosen seat buttons, summary, count, and form in sync
 
@@ -626,6 +626,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSeatCart();
     }
 
+    // CHECKOUT.PHP
     // do browser-side checks before checkout with additional PHP checks for security
     const checkoutForm = document.getElementById("checkout-form");
     

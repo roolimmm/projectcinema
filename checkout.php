@@ -178,6 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,142 +187,135 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
+    <script src="script.js?v=5" defer></script>
 </head>
+
 <body>
-
-<!-- nav header -->
-<header class="site-header">
-    <a href="index.php" class="logo">
-        <h1>RaZor Theatres</h1>
-    </a>
-    <nav>
-        <a href="index.php">Home</a>
-        <a href="movies.php">Movies</a>
-        <a href="theatres.php">Theatres</a>
-        <a href="booking.php">My Bookings</a>
-        <a href="cart.php"
-            class="nav-cart active"
-            aria-label="Cart">
-            <i class="fa-solid fa-cart-shopping"></i>
+    <header class="site-header">
+        <a href="index.php" class="logo">
+            <h1>RaZor Theatres</h1>
         </a>
-    </nav>
-</header>
+        
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="movies.php">Movies</a>
+            <a href="theatres.php">Theatres</a>
+            <a href="booking.php">My Bookings</a>
+            <a href="cart.php" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </nav>
+    </header>
 
-<main class="checkout-page">
-    <!-- link back to the cart and show any server-side validation or booking error. -->
-    <a href="cart.php" class="checkout-back">&larr; Back to Cart</a>
-
-    <h1>Checkout</h1>
-    <p class="checkout-subtitle">
-        Review your tickets and confirm your booking.
-    </p>
-
-    <?php if ($error !== "") { ?>
+    <main class="checkout-page">
+        <!-- link back to the cart and show any server-side validation or booking error. -->
+         <a href="cart.php" class="checkout-back">&larr; Back to Cart</a>
+         
+         <h1>Checkout</h1>
+         <p class="checkout-subtitle">
+            Review your tickets and confirm your booking.
+        </p>
+        
+        <?php if ($error !== "") { ?>
         <div class="checkout-error">
             <?php echo htmlspecialchars($error); ?>
         </div>
-    <?php } ?>
+        <?php } ?>
 
-    <div class="checkout-layout">
-        <!-- order form -->
-        <section class="checkout-panel">
-            <h2>Customer Details</h2>
+        <div class="checkout-layout">
+            <section class="checkout-panel">
+                <h2>Customer Details</h2>
 
-            <form method="POST" id="checkout-form">
-                <label for="customer_name">Full Name</label>
-                <input
-                    type="text"
-                    id="customer_name"
-                    name="customer_name"
-                    maxlength="100"
-                    value="<?php echo htmlspecialchars($name); ?>"
-                    required
-                >
+                <!-- order form -->
+                <form method="POST" id="checkout-form">
+                    <label for="customer_name">Full Name</label>
+                    <input
+                        type="text"
+                        id="customer_name"
+                        name="customer_name"
+                        maxlength="100"
+                        value="<?php echo htmlspecialchars($name); ?>"
+                        required
+                    >
 
-                <label for="customer_email">Email Address</label>
-                <input
-                    type="email"
-                    id="customer_email"
-                    name="customer_email"
-                    maxlength="255"
-                    value="<?php echo htmlspecialchars($email); ?>"
-                    required
-                >
+                    <label for="customer_email">Email Address</label>
+                    <input
+                        type="email"
+                        id="customer_email"
+                        name="customer_email"
+                        maxlength="255"
+                        value="<?php echo htmlspecialchars($email); ?>"
+                        required
+                    >
                 
-                <label for="confirm_email">Confirm Email Address</label>
-                <input
-                    type="email"
-                    id="confirm_email"
-                    name="confirm_email"
-                    maxlength="255"
-                    value="<?php echo htmlspecialchars($confirmEmail); ?>"
-                    required
-                >
+                    <label for="confirm_email">Confirm Email Address</label>
+                    <input
+                        type="email"
+                        id="confirm_email"
+                        name="confirm_email"
+                        maxlength="255"
+                        value="<?php echo htmlspecialchars($confirmEmail); ?>"
+                        required
+                    >
 
-                <label for="customer_phone">Phone Number</label>
-                <input
-                    type="tel"
-                    id="customer_phone"
-                    name="customer_phone"
-                    maxlength="16"
-                    placeholder="e.g. +6591234567"
-                    value="<?php echo htmlspecialchars($phone); ?>"
-                    required
-                >
+                    <label for="customer_phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="customer_phone"
+                        name="customer_phone"
+                        maxlength="16"
+                        placeholder="e.g. +6591234567"
+                        value="<?php echo htmlspecialchars($phone); ?>"
+                        required
+                    >
 
-                <p class="checkout-note">
-                    No online payment will be collected.
-                </p>
+                    <button type="submit" class="checkout-button">
+                        Confirm Booking
+                    </button>
+                </form>
+            </section>
 
-                <button type="submit" class="checkout-button">
-                    Confirm Booking
-                </button>
-            </form>
-        </section>
+            <!-- order summary -->
+            <aside class="checkout-panel">
+                <h2>Order Summary</h2>
+                <?php foreach ($cart as $item) { ?>
+                    <div class="checkout-movie">
+                        <h3><?php echo htmlspecialchars($item['title']); ?></h3>
+                        <p>
+                            Cinema:
+                            <?php echo htmlspecialchars($item['cinema']); ?>
+                        </p>
+                        <p>
+                            Date:
+                            <?php echo htmlspecialchars($item['date']); ?>
+                        </p>
+                        <p>
+                            Time:
+                            <?php echo htmlspecialchars(substr($item['time'], 0, 5)); ?>
+                        </p>
+                        <p>
+                            Seats:
+                            <?php echo htmlspecialchars(implode(', ', $item['seats'])); ?>
+                        </p>
+                    </div>
+                <?php } ?>
 
-        <!-- order summary -->
-        <aside class="checkout-panel">
-            <h2>Order Summary</h2>
-
-            <?php foreach ($cart as $item) { ?>
-                <div class="checkout-movie">
-                    <h3><?php echo htmlspecialchars($item['title']); ?></h3>
-                    <p>
-                        Cinema:
-                        <?php echo htmlspecialchars($item['cinema']); ?>
-                    </p>
-                    <p>
-                        Date:
-                        <?php echo htmlspecialchars($item['date']); ?>
-                    </p>
-                    <p>
-                        Time:
-                        <?php echo htmlspecialchars(substr($item['time'], 0, 5)); ?>
-                    </p>
-                    <p>
-                        Seats:
-                        <?php echo htmlspecialchars(implode(', ', $item['seats'])); ?>
-                    </p>
+                <div class="checkout-total-row">
+                    <span>Tickets</span>
+                    <span><?php echo $totalTickets; ?></span>
                 </div>
-            <?php } ?>
 
-            <div class="checkout-total-row">
-                <span>Tickets</span>
-                <span><?php echo $totalTickets; ?></span>
-            </div>
+                <div class="checkout-total-row">
+                    <span>Price per ticket</span>
+                    <span>S$<?php echo number_format($ticketPrice, 2); ?></span>
+                </div>
 
-            <div class="checkout-total-row">
-                <span>Price per ticket</span>
-                <span>S$<?php echo number_format($ticketPrice, 2); ?></span>
-            </div>
-
-            <div class="checkout-total-row grand-total">
-                <strong>Total</strong>
-                <strong>S$<?php echo number_format($totalPrice, 2); ?></strong>
-            </div>
-        </aside>
-    </div>
-</main>
-<script src="script.js"></script>
+                <div class="checkout-total-row grand-total">
+                    <strong>Total</strong>
+                    <strong>S$<?php echo number_format($totalPrice, 2); ?></strong>
+                </div>
+            </aside>
+        </div>
+    </main>
 </body>
 </html>

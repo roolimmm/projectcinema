@@ -125,6 +125,7 @@ $totalPrice = $totalTickets * $ticketPrice;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -136,9 +137,8 @@ $totalPrice = $totalTickets * $ticketPrice;
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 </head>
-<body>
 
-    <!-- nav header -->
+<body>
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -261,7 +261,6 @@ $totalPrice = $totalTickets * $ticketPrice;
         <?php } ?>
     </main>
 
-    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

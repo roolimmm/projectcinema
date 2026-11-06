@@ -71,6 +71,7 @@ $selectedDate = !empty($screenings)
     <link rel="stylesheet" href="style.css?v=6">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="script.js?v=5" defer></script>
 </head>
 
 <body>
@@ -181,6 +182,7 @@ $selectedDate = !empty($screenings)
                                 </p>
                             <?php } ?>
                         </div>
+                    <!-- for coming soon movies -->
                     <?php } else { ?>
                         <p class="coming-soon-label">
                             In Cinemas <?php echo htmlspecialchars($releaseDate); ?>
@@ -194,7 +196,5 @@ $selectedDate = !empty($screenings)
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>
-
-    <script src="script.js?v=5"></script>
 </body>
 </html>

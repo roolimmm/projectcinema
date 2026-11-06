@@ -129,6 +129,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
+    <script src="script.js?v=5" defer></script>
 </head>
 
 <body>
@@ -240,7 +241,5 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             All Rights Reserved.
         </p>
     </footer>
-
-    <script src="script.js?v=6"></script>
 </body>
 </html>
