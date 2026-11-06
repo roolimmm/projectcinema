@@ -124,7 +124,14 @@ function displayMovieCard($movie, $showReleaseDate = false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies | RaZor Theatres</title>
-    <link rel="stylesheet" href="style.css?v=5">
+    <!-- Bootstrap supplies the responsive CSS foundation; the local stylesheet below keeps the RaZor theme. -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="style.css?v=7">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -179,7 +186,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         <div class="movies-page-filters" aria-label="Filter movies">
             <div class="movies-page-filter">
                 <label for="movie-genre-filter">Genre</label>
-                <select id="movie-genre-filter">
+                <select id="movie-genre-filter" class="form-select">
                     <option value="">All genres</option>
                     <?php foreach ($genres as $genre) { ?>
                         <option value="<?php echo htmlspecialchars($genre, ENT_QUOTES, 'UTF-8'); ?>">
@@ -191,7 +198,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
 
             <div class="movies-page-filter">
                 <label for="movie-rating-filter">Rating</label>
-                <select id="movie-rating-filter">
+                <select id="movie-rating-filter" class="form-select">
                     <option value="">All ratings</option>
                     <?php foreach ($ratings as $rating) { ?>
                         <option value="<?php echo htmlspecialchars($rating, ENT_QUOTES, 'UTF-8'); ?>">
