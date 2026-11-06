@@ -818,8 +818,8 @@ button {
 
 /*** THEATRES.PHP ***/
 .page-banner {
-    padding: 65px 5%;
-    text-align: center;
+    padding: 35px 5%;
+    text-align: left;
     background: radial-gradient(
         ellipse at center,
         #68212e 0%,
@@ -828,7 +828,7 @@ button {
     );
 }
 .page-banner-content {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .page-banner h2 {
@@ -1621,8 +1621,8 @@ button {
 
 /*** VIEWBOOKINGS.PHP ***/
 .booking-page-banner {
-    padding: 65px 5%;
-    text-align: center;
+    padding: 35px 5%;
+    text-align: left;
     background: radial-gradient(
         ellipse at center,
         #68212e 0%,
@@ -1631,7 +1631,7 @@ button {
     );
 }
 .booking-page-banner-content {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .booking-page-label {
