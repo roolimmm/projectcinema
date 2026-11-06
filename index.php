@@ -2,7 +2,7 @@
 <?php
 require_once "db_connect.php";
 
-// retrieve movies
+// retrieve movies from database //
 $nowShowingQuery = "SELECT * FROM movies
                     WHERE status = 'now-showing'
                     ORDER BY release_date ASC";
@@ -34,7 +34,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
 </head>
 
 <body>
-    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -52,10 +51,6 @@ if (!$nowShowingResult || !$comingSoonResult) {
     </header>
 
     <main>
-<<<<<<< HEAD
-=======
-        <!-- hero banner -->
->>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
         <section class="hero-banner">
             <div class="hero-content">
                 <p class="hero-label">
@@ -70,11 +65,8 @@ if (!$nowShowingResult || !$comingSoonResult) {
             </div>
         </section>
 
-<<<<<<< HEAD
-=======
-        <!-- movie tab options -->
->>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
         <section id="movies" class="movie-section">
+            <!-- movie tabs for now showing and coming soon -->
             <div class="movie-tabs">
                 <button
                     id="now-showing-tab"
@@ -91,10 +83,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </button>
             </div>
 
-<<<<<<< HEAD
-=======
-            <!-- movie carousel -->
->>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
+            <!-- movie carousel for now showing movies -->
             <div id="now-showing-content" class="movie-category">
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -131,7 +120,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
 
                                     <a href="movie_details.php?movieId=<?php echo (int)$movie['movie_id']; ?>"
                                        class="buy-btn">
-                                        BUY TICKETS
+                                        VIEW DETAILS
                                     </a>
                                 </div>
                             </div>
@@ -144,10 +133,7 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
-<<<<<<< HEAD
-=======
-            <!-- movie carousel for upcoming movie -->
->>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
+            <!-- movie carousel for coming soon movies -->
             <div id="coming-soon-content" class="movie-category" hidden>
                 <div class="carousel-container">
                     <button class="carousel-prev" type="button">
@@ -205,16 +191,15 @@ if (!$nowShowingResult || !$comingSoonResult) {
                 </div>
             </div>
 
+            <!-- link to explore all movies -->
             <div class="explore-movies-container">
                 <a href="movies.php" class="hero-btn">
-                    Explore Movies
+                    Explore All Movies
                 </a>
             </div>
-
         </section>
     </main>
 
-    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.

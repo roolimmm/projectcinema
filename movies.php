@@ -2,7 +2,7 @@
 <?php
 require_once "db_connect.php";
 
-// load the movie fields for filters.
+// load the movie fields for filters
 $query = "
     SELECT
         movie_id,
@@ -27,11 +27,8 @@ $genres = [];
 $ratings = [];
 
 while ($movie = $result->fetch_assoc()) {
-<<<<<<< HEAD
-=======
 
     // separate movies into the two tabs, collect filter options
->>>>>>> 464fad1b211d72834f5e6d4ed1f82f2b3a7321cb
     if ($movie['status'] === 'now-showing') {
         $nowShowing[] = $movie;
     } elseif ($movie['status'] === 'coming-soon') {
@@ -53,20 +50,16 @@ $genres = array_unique($genres);
 sort($ratings, SORT_NATURAL | SORT_FLAG_CASE);
 $ratings = array_unique($ratings);
 
-// ensure both catalogue tabs use the same layout
+// function to display a movie card
 function displayMovieCard($movie, $showReleaseDate = false) {
     $movieId = (int) $movie['movie_id'];
     $movieUrl = "movie_details.php?movieId=" . $movieId;
 ?>
-    <article
-        class="movies-page-card"
+    <article class="movies-page-card" 
         data-genre="<?php echo htmlspecialchars($movie['genre'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
         data-rating="<?php echo htmlspecialchars($movie['rating'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
     >
-        <a
-            href="<?php echo $movieUrl; ?>"
-            class="movies-page-poster-link"
-        >
+        <a href="<?php echo $movieUrl; ?>" class="movies-page-poster-link">
             <img
                 src="<?php echo htmlspecialchars($movie['poster_url'] ?? ''); ?>"
                 alt="<?php echo htmlspecialchars($movie['title']); ?> poster"
@@ -115,10 +108,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                 </p>
             <?php } ?>
 
-            <a
-                href="<?php echo $movieUrl; ?>"
-                class="movies-page-details-button"
-            >
+            <a href="<?php echo $movieUrl; ?>" class="movies-page-details-button">
                 View Details
             </a>
         </div>
@@ -146,7 +136,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
         </a>
-        <!-- nav header -->
         <nav>
             <a href="index.php">Home</a>
             <a href="movies.php">Movies</a>
@@ -185,6 +174,7 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             </button>
         </div>
 
+        <!-- filter section for genre and rating -->
         <div class="movies-page-filters" aria-label="Filter movies">
             <div class="movies-page-filter">
                 <label for="movie-genre-filter">Genre</label>
@@ -219,10 +209,8 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             <p id="movie-filter-status" class="movies-page-filter-status" aria-live="polite"></p>
         </div>
 
-        <section
-            id="now-showing-content"
-            class="movies-page-section"
-        >
+        <!-- now showing movie sections -->
+        <section id="now-showing-content" class="movies-page-section">
             <div class="movies-page-grid">
                 <?php foreach ($nowShowing as $movie) { ?>
                     <?php displayMovieCard($movie); ?>
@@ -233,11 +221,8 @@ function displayMovieCard($movie, $showReleaseDate = false) {
             </p>
         </section>
 
-        <section
-            id="coming-soon-content"
-            class="movies-page-section"
-            hidden
-        >
+        <!-- coming soon movie sections -->
+        <section id="coming-soon-content" class="movies-page-section" hidden>
             <div class="movies-page-grid">
                 <?php foreach ($comingSoon as $movie) { ?>
                     <?php displayMovieCard($movie, true); ?>
@@ -249,7 +234,6 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         </section>
     </main>
 
-    <!-- copyright footer -->
     <footer class="site-footer">
         <p>
             &copy; 2026 RaZor Theatres.
