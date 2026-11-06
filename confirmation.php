@@ -73,9 +73,8 @@ $ticketStmt->close();
     <main class="checkout-page">
         <section class="checkout-panel confirmation-panel">
             
-            <h1>Booking Confirmed! &#10003;</h1>
-            <p>Thank you for your booking!</p>
-            <p>Your booking has been successfully recorded.</p>
+            <h1>Booking Confirmed &#10003;</h1>
+            <p>Thank you! Your booking has been successfully recorded.</p>
             <div class="booking-reference">
                 <span>Booking Reference</span>
                 <strong><?php echo htmlspecialchars($order['order_id']); ?></strong>
@@ -86,8 +85,7 @@ $ticketStmt->close();
 
             <?php foreach ($tickets as $ticket) { ?>
                 <div class="checkout-movie">
-                    <h3><?php echo htmlspecialchars($ticket['title']); ?></h3>
-
+                    <p><?php echo htmlspecialchars($ticket['title']); ?></h3>
                     <p><?php echo htmlspecialchars($ticket['cinema']); ?></p>
 
                     <p>
