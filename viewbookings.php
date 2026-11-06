@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     while ($ticket = $ticketResult->fetch_assoc()) {
                         $screeningKey = (string) $ticket['screening_id'];
 
-                        // create group first time this screening appears
+                        // initialize a booking group the first time a screening is encountered
                         if (!isset($ticketsByScreening[$screeningKey])) {
                             $ticketsByScreening[$screeningKey] = [
                                 'title' => $ticket['title'],
@@ -106,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <!-- nav header -->
     <header class="site-header">
         <a href="index.php" class="logo">
             <h1>RaZor Theatres</h1>
@@ -230,7 +230,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 
-    <!-- copyright footer -->
     <footer class="site-footer">
         <p>&copy; 2026 RaZor Theatres. All Rights Reserved.</p>
     </footer>

@@ -16,9 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
     $screeningId = filter_input(INPUT_POST, 'screening_id', FILTER_VALIDATE_INT);
     $selectedSeats = isset($_POST['selected_seats']) ? explode(',', $_POST['selected_seats']) : [];
     $selectedSeats = array_values(array_unique(array_map('trim', $selectedSeats)));
-    if (!$screeningId ||
-        empty($selectedSeats) ||
-        in_array('', $selectedSeats, true)) {
+    
+    if (!$screeningId || empty($selectedSeats) || in_array('', $selectedSeats, true)) {
         $error = "Please select at least one valid seat.";
     } else {
         // check screening id is valid before adding seats
@@ -169,6 +168,7 @@ $totalPrice = $totalTickets * $ticketPrice;
                 <?php echo htmlspecialchars($error); ?>
             </div>
         <?php } ?>
+
         <?php if (!empty($cart)) { ?>
             <!-- show each screening's tickets with summary -->
             <div class="cart-layout">
