@@ -54,64 +54,64 @@ $ticketStmt->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmed | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<!-- booking reference and ticket details -->
-<main class="checkout-page">
-    <section class="checkout-panel confirmation-panel">
-        <div class="confirmation-icon">&#10003;</div>
-
-        <h1>Booking Confirmed!</h1>
-
-        <p>Thank you for your booking!</p>
-        <p>Your booking has been successfully recorded.</p>
-
-        <div class="booking-reference">
-            <span>Booking Reference</span>
-            <strong><?php echo htmlspecialchars($order['order_id']); ?></strong>
-        </div>
-
-        <p>
-            Please save your booking reference to retrieve your tickets later.
-        </p>
-
-        <h2>Your Tickets</h2>
-
-        <?php foreach ($tickets as $ticket) { ?>
-            <div class="checkout-movie">
-                <h3><?php echo htmlspecialchars($ticket['title']); ?></h3>
-
-                <p><?php echo htmlspecialchars($ticket['cinema']); ?></p>
-
-                <p>
-                    <?php echo htmlspecialchars($ticket['screening_date']); ?>
-                    at
-                    <?php echo htmlspecialchars(substr($ticket['screening_time'], 0, 5)); ?>
-                </p>
-
-                <p>
-                    Seat:
-                    <strong><?php echo htmlspecialchars($ticket['seat_label']); ?></strong>
-                </p>
-            </div>
-        <?php } ?>
-
-        <div class="checkout-total-row grand-total">
-            <strong>Total</strong>
-            <strong>S$<?php echo number_format($order['total_amount'], 2); ?></strong>
-        </div>
-
-        <a href="index.php" class="checkout-button confirmation-home">
-            Back to Home
+    <header class="site-header">
+        <a href="index.php" class="logo">
+            <h1>RaZor Theatres</h1>
         </a>
-    </section>
-</main>
+    </header>
 
+    <!-- booking reference and ticket details -->
+    <main class="checkout-page">
+        <section class="checkout-panel confirmation-panel">
+            
+            <h1>Booking Confirmed! &#10003;</h1>
+            <p>Thank you for your booking!</p>
+            <p>Your booking has been successfully recorded.</p>
+            <div class="booking-reference">
+                <span>Booking Reference</span>
+                <strong><?php echo htmlspecialchars($order['order_id']); ?></strong>
+            </div>
+            <p>Please save your booking reference to retrieve your tickets later. </p>
+
+            <h2>Your Tickets</h2>
+
+            <?php foreach ($tickets as $ticket) { ?>
+                <div class="checkout-movie">
+                    <h3><?php echo htmlspecialchars($ticket['title']); ?></h3>
+
+                    <p><?php echo htmlspecialchars($ticket['cinema']); ?></p>
+
+                    <p>
+                        <?php echo htmlspecialchars($ticket['screening_date']); ?>
+                        at
+                        <?php echo htmlspecialchars(substr($ticket['screening_time'], 0, 5)); ?>
+                    </p>
+
+                    <p>
+                        Seat:
+                        <strong><?php echo htmlspecialchars($ticket['seat_label']); ?></strong>
+                    </p>
+                </div>
+            <?php } ?>
+
+            <div class="checkout-total-row grand-total">
+                <strong>Total</strong>
+                <strong>S$<?php echo number_format($order['total_amount'], 2); ?></strong>
+            </div>
+
+            <a href="index.php" class="checkout-button confirmation-home">
+                Back to Home
+            </a>
+        </section>
+    </main>
 </body>
 </html>
