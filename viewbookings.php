@@ -137,9 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <main class="booking-lookup-page">
-        <section class="page-banner">
-            <div class="page-banner-content">
-                <p class="hero-label">YOUR NEXT MOVIE NIGHT</p>
+        <section class="booking-page-banner">
+            <div class="booking-page-banner-content">
+                <p class="booking-page-label">YOUR NEXT MOVIE NIGHT</p>
                 <h2>My Bookings</h2>
                 <p>Enter the order ID from your booking confirmation to check your tickets.</p>
             </div>

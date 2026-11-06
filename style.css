@@ -2,12 +2,12 @@
 /*LINES 47 - 313 : INDEX.PHP*/
 /*LINES 315 - 574 : MOVIE_DETAILS.PHP*/
 /*LINES 576 - 817 : MOVIES.PHP*/
-/*LINES 820 - 1016 : THEATRES.PHP*/
-/*LINES 1018 - 1215 : BOOKING.PHP*/
-/*LINES 1217 - 1420 : CART.PHP*/
-/*LINES 1422 - 1544 : CHECKOUT.PHP*/  
-/*LINES 1546 - 1577 : CONFIRMATION.PHP*/
-/*LINES 1579 - 1725 : VIEWBOOKINGS.PHP*/
+/*LINES 819 - 1059 : THEATRES.PHP*/
+/*LINES 1061 - 1258 : BOOKING.PHP*/
+/*LINES 1260 - 1463 : CART.PHP*/
+/*LINES 1465 - 1587 : CHECKOUT.PHP*/  
+/*LINES 1589 - 1620 : CONFIRMATION.PHP*/
+/*LINES 1622 - 1804 : VIEWBOOKINGS.PHP*/
 
 
 /* GENERAL STYLE */
@@ -817,6 +817,48 @@ button {
 /*** MOVIES.PHP ***/
 
 /*** THEATRES.PHP ***/
+.page-banner {
+    padding: 65px 5%;
+    text-align: center;
+    background: radial-gradient(
+        ellipse at center,
+        #68212e 0%,
+        #32121d 45%,
+        #101014 100%
+    );
+}
+.page-banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.page-banner h2 {
+    margin: 15px 0;
+    font-size: 38px;
+    color: #ffffff;
+}
+.page-banner-content > p:last-child {
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/*Main Content*/
+.content-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 30px;
+}
+.content-section > h3 {
+    margin: 0 0 15px;
+    font-size: 26px;
+    color: #ffffff;
+}
+.content-intro {
+    margin: 0 0 30px;
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1.7;
+}
 .theatre-contact {
     max-width: 1200px;
     margin: 0 auto 35px;
@@ -853,6 +895,8 @@ button {
 .theatre-contact-item a:hover {
     color: #f28b98;
 }
+
+/*Theatre Cards*/
 .theatre-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1576,6 +1620,42 @@ button {
 /*** CONFIRMATION.PHP ***/
 
 /*** VIEWBOOKINGS.PHP ***/
+.booking-page-banner {
+    padding: 65px 5%;
+    text-align: center;
+    background: radial-gradient(
+        ellipse at center,
+        #68212e 0%,
+        #32121d 45%,
+        #101014 100%
+    );
+}
+.booking-page-banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.booking-page-label {
+    color: #ffb5bd;
+    font-size: 13px;
+    letter-spacing: 4px;
+}
+.booking-page-banner h2 {
+    margin: 15px 0;
+    font-size: 38px;
+    color: #ffffff;
+}
+.booking-page-banner-content > p:last-child {
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/*Booking Lookup Container*/
+.booking-lookup-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 55px 30px 80px;
+}
 .booking-lookup-content {
     max-width: 1000px;
     margin: 0 auto;
