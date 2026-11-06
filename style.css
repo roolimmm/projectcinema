@@ -1,13 +1,13 @@
-//*CSS OVERVIEW*//
-//*LINES 47 - 313 : INDEX.PHP*//
-//*LINES 315 - 574 : MOVIE_DETAILS.PHP*//
-//*LINES 576 - 817 : MOVIES.PHP*//
-//*LINES 820 - 1016 : THEATRES.PHP*//
-//*LINES 1018 - 1215 : BOOKING.PHP*//
-//*LINES 1217 - 1420 : CART.PHP*//
-//*LINES 1422 - 1544 : CHECKOUT.PHP*//  
-//*LINES 1546 - 1577 : CONFIRMATION.PHP*//
-//*LINES 1579 - 1725 : VIEWBOOKINGS.PHP*//
+/*CSS OVERVIEW*/
+/*LINES 47 - 313 : INDEX.PHP*/
+/*LINES 315 - 574 : MOVIE_DETAILS.PHP*/
+/*LINES 576 - 817 : MOVIES.PHP*/
+/*LINES 820 - 1016 : THEATRES.PHP*/
+/*LINES 1018 - 1215 : BOOKING.PHP*/
+/*LINES 1217 - 1420 : CART.PHP*/
+/*LINES 1422 - 1544 : CHECKOUT.PHP*/  
+/*LINES 1546 - 1577 : CONFIRMATION.PHP*/
+/*LINES 1579 - 1725 : VIEWBOOKINGS.PHP*/
 
 
 /* GENERAL STYLE */
@@ -788,7 +788,6 @@ button {
     margin: 0 0 18px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
     overflow: hidden;
 }
 .movies-page-release {
