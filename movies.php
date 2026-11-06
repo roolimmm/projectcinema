@@ -131,27 +131,40 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     >
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=10">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
     <script src="script.js?v=5" defer></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+        defer
+    ></script>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="index.php" class="logo">
-            <h1>RaZor Theatres</h1>
-        </a>
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="movies.php">Movies</a>
-            <a href="theatres.php">Theatres</a>
-            <a href="viewbookings.php">My Bookings</a>
-            <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <div class="container">
+                <a href="index.php" class="navbar-brand logo"><h1>RaZor Theatres</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="primaryNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="movies.php">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="theatres.php">Theatres</a></li>
+                        <li class="nav-item"><a class="nav-link" href="viewbookings.php">My Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link nav-cart" href="cart.php" aria-label="Shopping cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -183,9 +196,9 @@ function displayMovieCard($movie, $showReleaseDate = false) {
         </div>
 
         <!-- filter section for genre and rating -->
-        <div class="movies-page-filters" aria-label="Filter movies">
-            <div class="movies-page-filter">
-                <label for="movie-genre-filter">Genre</label>
+        <div class="movies-page-filters row g-3" aria-label="Filter movies">
+            <div class="movies-page-filter col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="movie-genre-filter">Genre</label>
                 <select id="movie-genre-filter" class="form-select">
                     <option value="">All genres</option>
                     <?php foreach ($genres as $genre) { ?>
@@ -196,8 +209,8 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                 </select>
             </div>
 
-            <div class="movies-page-filter">
-                <label for="movie-rating-filter">Rating</label>
+            <div class="movies-page-filter col-12 col-md-6 col-lg-3">
+                <label class="form-label" for="movie-rating-filter">Rating</label>
                 <select id="movie-rating-filter" class="form-select">
                     <option value="">All ratings</option>
                     <?php foreach ($ratings as $rating) { ?>
@@ -208,13 +221,13 @@ function displayMovieCard($movie, $showReleaseDate = false) {
                 </select>
             </div>
 
-            <button type="button" id="apply-movie-filters" class="movies-page-apply-filters">
+            <button type="button" id="apply-movie-filters" class="btn movies-page-apply-filters col-12 col-md-6 col-lg-3">
                 Apply filters
             </button>
-            <button type="button" id="clear-movie-filters" class="movies-page-clear-filters">
+            <button type="button" id="clear-movie-filters" class="btn movies-page-clear-filters col-12 col-md-6 col-lg-3">
                 Clear filters
             </button>
-            <p id="movie-filter-status" class="movies-page-filter-status" aria-live="polite"></p>
+            <p id="movie-filter-status" class="movies-page-filter-status col-12" aria-live="polite"></p>
         </div>
 
         <!-- now showing movie sections -->

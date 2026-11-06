@@ -61,23 +61,38 @@ $seatStmt->close();
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     >
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=10">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="script.js?v=3"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+        defer
+    ></script>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="index.php" class="logo"><h1>RaZor Theatres</h1></a>
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="movies.php">Movies</a>
-            <a href="theatres.php">Theatres</a>
-            <a href="viewbookings.php">My Bookings</a>
-            <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <div class="container">
+                <a href="index.php" class="navbar-brand logo"><h1>RaZor Theatres</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="primaryNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="movies.php">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="theatres.php">Theatres</a></li>
+                        <li class="nav-item"><a class="nav-link" href="viewbookings.php">My Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link nav-cart" href="cart.php" aria-label="Shopping cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -101,9 +116,9 @@ $seatStmt->close();
             </p>
         </div>
 
-        <div class="seat-layout-container">
+        <div class="seat-layout-container row g-4">
             <!-- render seating plan and disable any seat not marked available -->
-            <section class="cinema-seat-plan" aria-labelledby="seat-plan-heading">
+            <section class="cinema-seat-plan col-12 col-lg-8" aria-labelledby="seat-plan-heading">
                 <h3 id="seat-plan-heading" class="visually-hidden">Cinema seating plan</h3>
                 <div class="screen-label">Screen</div>
                 <div class="screen-line" aria-hidden="true"></div>
@@ -137,7 +152,7 @@ $seatStmt->close();
             </section>
 
             <!-- summary updates using javascript and submitted to cart handler. -->
-            <aside class="seat-cart" aria-labelledby="seat-cart-heading">
+            <aside class="seat-cart col-12 col-lg-4" aria-labelledby="seat-cart-heading">
                 <h3 id="seat-cart-heading">Your Seats</h3>
                 <p id="seat-cart-empty">No seats selected.</p>
                 <ul id="selected-seats-list"></ul>

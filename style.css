@@ -1,15 +1,15 @@
 /* CSS OVERVIEW
    LINES 16-68     : GENERAL / SHARED STYLES
-   LINES 69-341    : INDEX.PHP
-   LINES 344-602   : MOVIE_DETAILS.PHP
-   LINES 605-845   : MOVIES.PHP
-   LINES 848-1088  : THEATRES.PHP
-   LINES 1091-1287 : BOOKING.PHP
-   LINES 1290-1491 : CART.PHP
-   LINES 1495-1616 : CHECKOUT.PHP
-   LINES 1619-1649 : CONFIRMATION.PHP
-   LINES 1652-1835 : VIEWBOOKINGS.PHP
-   LINES 1839-1989 : RESPONSIVE OVERRIDES
+   LINES 69-340    : INDEX.PHP
+   LINES 342-594   : MOVIE_DETAILS.PHP
+   LINES 596-833   : MOVIES.PHP
+   LINES 835-1069  : THEATRES.PHP
+   LINES 1071-1265 : BOOKING.PHP
+   LINES 1267-1467 : CART.PHP
+   LINES 1469-1588 : CHECKOUT.PHP
+   LINES 1590-1621 : CONFIRMATION.PHP
+   LINES 1623-1807 : VIEWBOOKINGS.PHP
+   LINES 1810-1935 : RESPONSIVE OVERRIDES
 */
 
 
@@ -68,12 +68,11 @@ button {
 
 /*** INDEX.PHP ***/
 .site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 6%;
     background-color: #17171d;
     border-bottom: 1px solid #303038;
+}
+.site-header .navbar {
+    padding: 14px 0;
 }
 .logo h1 {
     margin: 0;
@@ -81,18 +80,17 @@ button {
     letter-spacing: 1px;
     font-weight: 700;
 }
-.site-header nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+.site-header .navbar-nav {
+    gap: 14px;
 }
-.site-header nav a {
+.site-header .nav-link {
     font-size: 15px;
     font-weight: 700;
     color: #f4f4f5;
     transition: color 0.2s ease;
 }
-.site-header nav a:hover {
+.site-header .nav-link:hover,
+.site-header .nav-link:focus-visible {
     color: #e50914;
 }
 
@@ -357,21 +355,14 @@ button {
     color: #ffffff;
 }
 .movie-details-container {
-    display: flex;
     align-items: flex-start;
-    gap: 55px;
-}
-.details-poster {
-    flex: 0 0 300px;
 }
 .details-poster img {
     display: block;
     width: 100%;
+    max-width: 300px;
     height: auto;
     border-radius: 8px;
-}
-.details-info {
-    flex: 1;
 }
 .details-info h2 {
     margin: 0 0 20px;
@@ -651,10 +642,7 @@ button {
 
 /* Movie filters */
 .movies-page-filters {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) repeat(2, auto);
     align-items: end;
-    gap: 18px;
     margin: 0 0 32px;
     padding: 22px;
     border: 1px solid #303038;
@@ -726,7 +714,6 @@ button {
 }
 .movies-page-apply-filters:focus-visible { outline-color: #f05a68; }
 .movies-page-filter-status {
-    grid-column: 1 / -1;
     margin: 0;
     color: #a1a1aa;
     font-size: 14px;
@@ -900,11 +887,6 @@ button {
     font-size: 24px;
     margin: 0 0 20px;
 }
-.theatre-contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 35px;
-}
 .theatre-contact-item h5 {
     color: #d6a45a;
     font-size: 16px;
@@ -928,9 +910,7 @@ button {
 
 /*Theatre Cards*/
 .theatre-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
+    align-items: stretch;
 }
 .theatre-card {
     display: flex;
@@ -1104,9 +1084,6 @@ button {
     color: #cccccc;
 }
 .seat-layout-container {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 280px;
-    gap: 35px;
     align-items: start;
 }
 .cinema-seat-plan {
@@ -1316,9 +1293,6 @@ button {
 
 /* Cart Layout */
 .cart-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
     align-items: start;
 }
 .cart-items {
@@ -1518,9 +1492,6 @@ button {
     margin-bottom: 35px;
 }
 .checkout-layout {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 30px;
     align-items: start;
 }
 .checkout-panel {
@@ -1836,56 +1807,22 @@ button {
 /*** VIEWBOOKINGS.PHP ***/
 
 /* Keep shared page layouts usable on tablets and phones while preserving the desktop design. */
-@media (max-width: 991.98px) {
-    .theatre-grid,
-    .theatre-contact-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .movies-page-filters {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .seat-layout-container {
-        grid-template-columns: minmax(0, 1fr) 240px;
-        gap: 20px;
-    }
-}
-
 @media (max-width: 767.98px) {
-    .site-header {
-        flex-direction: column;
-        gap: 18px;
-        padding: 20px 5%;
+    .site-header .navbar-nav {
+        gap: 0;
     }
 
-    .site-header nav {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 20px;
+    .movie-details-container {
+        --bs-gutter-x: 1rem;
     }
 
     .hero-content h2 {
         font-size: clamp(30px, 7vw, 42px);
     }
 
-    .movie-details-container {
-        flex-direction: column;
-        gap: 30px;
-    }
-
     .details-poster {
-        flex-basis: auto;
-        width: min(300px, 100%);
-    }
-
-    .theatre-grid,
-    .theatre-contact-grid,
-    .movies-page-filters,
-    .cart-layout,
-    .checkout-layout,
-    .seat-layout-container {
-        grid-template-columns: minmax(0, 1fr);
+        display: flex;
+        justify-content: center;
     }
 
     .seat-cart {
@@ -1896,6 +1833,15 @@ button {
     .theatre-showtimes-header {
         align-items: flex-start;
         flex-wrap: wrap;
+    }
+
+    .showtimes-header .screening-calendar {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .showtimes-header .screening-week-picker {
+        width: 100%;
     }
 
     .cart-item {
@@ -1943,11 +1889,11 @@ button {
 }
 
 @media (max-width: 575.98px) {
-    .site-header nav {
-        gap: 10px 15px;
+    .site-header .navbar {
+        padding: 12px 0;
     }
 
-    .site-header nav a {
+    .site-header .nav-link {
         font-size: 14px;
     }
 

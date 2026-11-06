@@ -190,27 +190,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     >
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=10">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
     <script src="script.js?v=5" defer></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+        defer
+    ></script>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="index.php" class="logo">
-            <h1>RaZor Theatres</h1>
-        </a>
-        
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="movies.php">Movies</a>
-            <a href="theatres.php">Theatres</a>
-            <a href="booking.php">My Bookings</a>
-            <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <div class="container">
+                <a href="index.php" class="navbar-brand logo"><h1>RaZor Theatres</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="primaryNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="movies.php">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="theatres.php">Theatres</a></li>
+                        <li class="nav-item"><a class="nav-link" href="viewbookings.php">My Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link nav-cart" href="cart.php" aria-label="Shopping cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -229,13 +241,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <?php } ?>
 
-        <div class="checkout-layout">
-            <section class="checkout-panel">
+        <div class="checkout-layout row g-4">
+            <section class="checkout-panel col-12 col-lg-7">
                 <h2>Customer Details</h2>
 
                 <!-- order form -->
                 <form method="POST" id="checkout-form">
-                    <label for="customer_name">Full Name</label>
+                    <label class="form-label" for="customer_name">Full Name</label>
                     <input
                         type="text"
                         class="form-control"
@@ -246,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                     >
 
-                    <label for="customer_email">Email Address</label>
+                    <label class="form-label" for="customer_email">Email Address</label>
                     <input
                         type="email"
                         class="form-control"
@@ -257,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                     >
                 
-                    <label for="confirm_email">Confirm Email Address</label>
+                    <label class="form-label" for="confirm_email">Confirm Email Address</label>
                     <input
                         type="email"
                         class="form-control"
@@ -268,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                     >
 
-                    <label for="customer_phone">Phone Number</label>
+                    <label class="form-label" for="customer_phone">Phone Number</label>
                     <input
                         type="tel"
                         class="form-control"
@@ -280,14 +292,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                     >
 
-                    <button type="submit" class="checkout-button">
+                    <button type="submit" class="btn checkout-button">
                         Confirm Booking
                     </button>
                 </form>
             </section>
 
             <!-- order summary -->
-            <aside class="checkout-panel">
+            <aside class="checkout-panel col-12 col-lg-5">
                 <h2>Order Summary</h2>
                 <?php foreach ($cart as $item) { ?>
                     <div class="checkout-movie">

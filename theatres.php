@@ -44,26 +44,38 @@ while ($row = $result->fetch_assoc()) {
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     >
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=10">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="script.js?v=5" defer></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+        defer
+    ></script>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="index.php" class="logo">
-            <h1>RaZor Theatres</h1>
-        </a>
-
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="movies.php">Movies</a>
-            <a href="theatres.php">Theatres</a>
-            <a href="viewbookings.php">My Bookings</a>
-            <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <div class="container">
+                <a href="index.php" class="navbar-brand logo"><h1>RaZor Theatres</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav" aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="primaryNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="movies.php">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="theatres.php">Theatres</a></li>
+                        <li class="nav-item"><a class="nav-link" href="viewbookings.php">My Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link nav-cart" href="cart.php" aria-label="Shopping cart">
+                            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -86,8 +98,8 @@ while ($row = $result->fetch_assoc()) {
                 time at the movies feel special.
             </p>
 
-            <div class="theatre-grid">
-                <article class="theatre-card" id="theatre-orchard">
+            <div class="theatre-grid row g-4">
+                <article class="theatre-card col-12 col-md-6 col-lg-4" id="theatre-orchard">
                     <p class="card-kicker">Central Singapore</p>
                     <h4>RaZor Theatres Orchard</h4>
                     <p class="theatre-location">Orchard Road</p>
@@ -102,12 +114,12 @@ while ($row = $result->fetch_assoc()) {
                         <li>Snack bar</li>
                     </ul>
 
-                    <button class="theatre-showtimes-btn" data-cinema="Orchard">
+                    <button class="btn theatre-showtimes-btn" data-cinema="Orchard">
                         View Showtimes
                     </button>
                 </article>
 
-                <article class="theatre-card" id="theatre-harbour">
+                <article class="theatre-card col-12 col-md-6 col-lg-4" id="theatre-harbour">
                     <p class="card-kicker">Waterfront</p>
                     <h4>RaZor Theatres Harbour</h4>
                     <p class="theatre-location">Harbourfront</p>
@@ -122,12 +134,12 @@ while ($row = $result->fetch_assoc()) {
                         <li>Snack bar</li>
                     </ul>
 
-                    <button class="theatre-showtimes-btn" data-cinema="Harbour">
+                    <button class="btn theatre-showtimes-btn" data-cinema="Harbour">
                         View Showtimes
                     </button>
                 </article>
 
-                <article class="theatre-card" id="theatre-north">
+                <article class="theatre-card col-12 col-md-6 col-lg-4" id="theatre-north">
                     <p class="card-kicker">North Singapore</p>
                     <h4>RaZor Theatres North</h4>
                     <p class="theatre-location">Yishun</p>
@@ -142,7 +154,7 @@ while ($row = $result->fetch_assoc()) {
                         <li>Snack bar</li>
                     </ul>
 
-                    <button class="theatre-showtimes-btn" data-cinema="Yishun">
+                    <button class="btn theatre-showtimes-btn" data-cinema="Yishun">
                         View Showtimes
                     </button>
                 </article>
@@ -211,20 +223,20 @@ while ($row = $result->fetch_assoc()) {
 
         <section class="theatre-contact" aria-labelledby="theatre-contact-heading">
             <h4 id="theatre-contact-heading">Visit &amp; Contact</h4>
-            <div class="theatre-contact-grid">
-                <div class="theatre-contact-item">
+            <div class="theatre-contact-grid row g-4">
+                <div class="theatre-contact-item col-12 col-md-6 col-lg-4">
                     <h5>Operation Hours</h5>
                     <p><strong>Mon - Fri:</strong> 12:00pm - 11:30pm</p>
                     <p><strong>Sat &amp; Sun:</strong> 10:30am - 11:30pm</p>
                     <p><strong>Public Holidays:</strong> 10:30am - 11:30pm</p>
                 </div>
-                <div class="theatre-contact-item">
+                <div class="theatre-contact-item col-12 col-md-6 col-lg-4">
                     <h5>Call Us</h5>
                     <p><a href="tel:+6561234567">+65 6123 4567</a></p>
                     <p>Monday - Sunday</p>
                     <p>10:30am - 11:30pm</p>
                 </div>
-                <div class="theatre-contact-item">
+                <div class="theatre-contact-item col-12 col-md-6 col-lg-4">
                     <h5>Email Us</h5>
                     <p>hello@razortheatres.com</p>
                     <p>We aim to reply within two working days.</p>
