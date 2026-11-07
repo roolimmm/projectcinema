@@ -184,9 +184,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
     <script src="script.js?v=5" defer></script>
 </head>
 
@@ -202,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="theatres.php">Theatres</a>
             <a href="booking.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
+                <img src="images/cart.png" alt="Shopping Cart">
             </a>
         </nav>
     </header>

@@ -55,8 +55,6 @@ $seatStmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Seats | RaZor Theatres</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="script.js?v=3"></script>
 </head>
 
@@ -69,7 +67,7 @@ $seatStmt->close();
             <a href="theatres.php">Theatres</a>
             <a href="viewbookings.php">My Bookings</a>
             <a href="cart.php" class="nav-cart">
-                <i class="fa-solid fa-cart-shopping"></i>
+                <img src="images/cart.png" alt="Shopping Cart">
             </a>
         </nav>
     </header>

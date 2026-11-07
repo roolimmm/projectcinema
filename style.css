@@ -30,6 +30,18 @@ a {
 button {
     font: inherit;
 }
+.nav-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-cart img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
 
 /*Page Banner (Theatres and View Bookings)*/
 .page-banner {
