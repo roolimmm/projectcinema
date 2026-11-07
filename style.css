@@ -1,13 +1,13 @@
 /*CSS OVERVIEW*/
-/*LINES 47 - 313 : INDEX.PHP*/
-/*LINES 315 - 574 : MOVIE_DETAILS.PHP*/
-/*LINES 576 - 817 : MOVIES.PHP*/
-/*LINES 819 - 1059 : THEATRES.PHP*/
-/*LINES 1061 - 1258 : BOOKING.PHP*/
-/*LINES 1260 - 1463 : CART.PHP*/
-/*LINES 1465 - 1587 : CHECKOUT.PHP*/  
-/*LINES 1589 - 1620 : CONFIRMATION.PHP*/
-/*LINES 1622 - 1804 : VIEWBOOKINGS.PHP*/
+/*LINES 79 - 342 : INDEX.PHP*/
+/*LINES 345 - 604 : MOVIE_DETAILS.PHP*/
+/*LINES 607 - 848 : MOVIES.PHP*/
+/*LINES 851 - 1059 : THEATRES.PHP*/
+/*LINES 1062 - 1259 : BOOKING.PHP*/
+/*LINES 1262 - 1465 : CART.PHP*/
+/*LINES 1468 - 1590 : CHECKOUT.PHP*/  
+/*LINES 1593 - 1624 : CONFIRMATION.PHP*/
+/*LINES 1627 - 1779 : VIEWBOOKINGS.PHP*/
 
 
 /* GENERAL STYLE */
@@ -30,18 +30,50 @@ a {
 button {
     font: inherit;
 }
-.site-footer {
-    padding: 30px 20px;
 
-    background-color: #17171d;
-    border-top: 1px solid #303038;
-
-    color: #aaaaaa;
-    text-align: center;
-
+/*Page Banner (Theatres and View Bookings)*/
+.page-banner {
+    padding: 50px 5%;
+    text-align: left;
+    background: radial-gradient(
+        ellipse at center,
+        #68212e 0%,
+        #32121d 45%,
+        #101014 100%
+    );
+}
+.page-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.page-banner .hero-label {
+    color: #ffb5bd;
     font-size: 13px;
+    letter-spacing: 4px;
+    margin: 0 0 15px;
+}
+.page-banner h2 {
+    margin: 0 0 15px;
+    font-size: 38px;
+    color: #ffffff;
+}
+.page-banner-content > p:last-child {
+    margin: 0;
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
+/*Footer*/
+.site-footer {
+    padding: 30px 20px;
+    background-color: #17171d;
+    border-top: 1px solid #303038;
+    color: #aaaaaa;
+    text-align: center;
+    font-size: 13px;
+}
+/* GENERAL STYLE */
 
 
 /*** INDEX.PHP ***/
@@ -71,7 +103,6 @@ button {
     color: #e50914;
 }
 
-
 /*Hero Banner*/
 .hero-banner {
     min-height: 260px;
@@ -99,7 +130,6 @@ button {
     font-size: 42px;
     margin: 15px 0;
 }
-
 .hero-content p {
     color: #dddddd;
 }
@@ -127,7 +157,6 @@ button {
 .explore-movies-container .hero-btn {
     margin-top: 0;
 }
-
 .movie-section {
     max-width: 1300px;
     margin: 35px auto 80px;
@@ -311,6 +340,7 @@ button {
     background-color: #e50914;
 }
 /*** INDEX.PHP ***/
+
 
 /*** MOVIE_DETAILS.PHP ***/
 .movie-details-section {
@@ -573,11 +603,12 @@ button {
 }
 /*** MOVIE_DETAILS.PHP ***/
 
+
 /*** MOVIES.PHP ***/
 .movies-page {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 70px 5%;
+    padding: 35px 5% 70px;
     min-height: 70vh;
 }
 .movies-page-header { margin-bottom: 35px; }
@@ -816,33 +847,8 @@ button {
 }
 /*** MOVIES.PHP ***/
 
-/*** THEATRES.PHP ***/
-.page-banner {
-    padding: 35px 5%;
-    text-align: left;
-    background: radial-gradient(
-        ellipse at center,
-        #68212e 0%,
-        #32121d 45%,
-        #101014 100%
-    );
-}
-.page-banner-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.page-banner h2 {
-    margin: 15px 0;
-    font-size: 38px;
-    color: #ffffff;
-}
-.page-banner-content > p:last-child {
-    color: #cccccc;
-    font-size: 16px;
-    line-height: 1.7;
-}
 
-/*Main Content*/
+/*** THEATRES.PHP ***/
 .content-section {
     max-width: 1200px;
     margin: 0 auto;
@@ -852,12 +858,6 @@ button {
     margin: 0 0 15px;
     font-size: 26px;
     color: #ffffff;
-}
-.content-intro {
-    margin: 0 0 30px;
-    color: #cccccc;
-    font-size: 15px;
-    line-height: 1.7;
 }
 .theatre-contact {
     max-width: 1200px;
@@ -1058,6 +1058,7 @@ button {
 }
 /*** THEATRES.PHP ***/
 
+
 /*** BOOKING.PHP ***/
 .seat-selection-page {
     max-width: 1200px;
@@ -1256,6 +1257,7 @@ button {
     margin-left: 12px;
 }
 /*** BOOKING.PHP ***/
+
 
 /*** CART.PHP ***/
 .cart-page {
@@ -1462,6 +1464,7 @@ button {
 }
 /*** CART.PHP ***/
 
+
 /*** CHECKOUT.PHP ***/
 .checkout-page {
     max-width: 1200px;
@@ -1586,6 +1589,7 @@ button {
 }
 /*** CHECKOUT.PHP ***/
 
+
 /*** CONFIRMATION.PHP ***/
 .confirmation-panel {
     max-width: 650px;
@@ -1619,37 +1623,8 @@ button {
 }
 /*** CONFIRMATION.PHP ***/
 
-/*** VIEWBOOKINGS.PHP ***/
-.booking-page-banner {
-    padding: 35px 5%;
-    text-align: left;
-    background: radial-gradient(
-        ellipse at center,
-        #68212e 0%,
-        #32121d 45%,
-        #101014 100%
-    );
-}
-.booking-page-banner-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.booking-page-label {
-    color: #ffb5bd;
-    font-size: 13px;
-    letter-spacing: 4px;
-}
-.booking-page-banner h2 {
-    margin: 15px 0;
-    font-size: 38px;
-    color: #ffffff;
-}
-.booking-page-banner-content > p:last-child {
-    color: #cccccc;
-    font-size: 16px;
-    line-height: 1.7;
-}
 
+/*** VIEWBOOKINGS.PHP ***/
 /*Booking Lookup Container*/
 .booking-lookup-content {
     max-width: 1000px;

@@ -73,12 +73,6 @@ while ($row = $result->fetch_assoc()) {
         </section>
 
         <section class="content-section" aria-labelledby="theatre-list-heading">
-            <h3 id="theatre-list-heading">Find your cinema</h3>
-            <p class="content-intro">
-                Explore our city locations, each designed to make your
-                time at the movies feel special.
-            </p>
-
             <div class="theatre-grid">
                 <article class="theatre-card" id="theatre-orchard">
                     <p class="card-kicker">Central Singapore</p>
